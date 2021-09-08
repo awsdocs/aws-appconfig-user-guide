@@ -1,0 +1,13 @@
+# AWS AppConfig User Guide Document History<a name="doc-history"></a>
+
+The following table describes the important changes to the documentation since the last release of AWS AppConfig\.
+
+**Current API version: 2019\-10\-09**
+
+| Change | Description | Date | 
+| --- |--- |--- |
+| [New region ARN for AWS AppConfig Lambda extension](#doc-history) | AWS AppConfig Lambda extension is available in the new Asia Pacific \(Osaka\) region\. The Amazon Resource Name \(ARN\) is required to create a Lambda in the region\. For more information about the Asia Pacific \(Osaka\) region ARN, see [Adding the AWS AppConfig Lambda extension](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-lambda-extensions.html#appconfig-integration-lambda-extensions-enabling)\. | March 4, 2021 | 
+| [AWS AppConfig Lambda extension](#doc-history) | If you use AWS AppConfig to manage configurations for a Lambda function, then we recommend that you add the AWS AppConfig Lambda extension\. This extension includes best practices that simplify using AWS AppConfig while reducing costs\. Reduced costs result from fewer API calls to the AWS AppConfig service and, separately, reduced costs from shorter Lambda function processing times\. For more information, see [AWS AppConfig integration with Lambda extensions](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-lambda-extensions.html)\. | October 8, 2020 | 
+| [New section](#doc-history) | Added a new section that provides instructions for setting up AWS AppConfig\. For more information, see [Setting up AWS AppConfig](https://docs.aws.amazon.com/appconfig/latest/userguide/setting-up-appconfig.html)\. | September 30, 2020 | 
+| [Added commandline procedures](#doc-history) | Procedures in this user guide now include commandline steps for the AWS Command Line Interface \(AWS CLI\) and Tools for Windows PowerShell\. For more information, see [Working with AWS AppConfig](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-application.html)\. | September 30, 2020 | 
+| [Launch of AWS AppConfig user guide](#doc-history) | Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations\. AWS AppConfig supports controlled deployments to applications of any size and includes built\-in validation checks and monitoring\. You can use AWS AppConfig with applications hosted on EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices\. | July 31, 2020 | 
