@@ -1,11 +1,7 @@
-## My Project
+## aws-appconfig-user-guide
 
-TODO: Fill this README out!
+The open source version of the AWS AppConfig user guide. You can submit feedback & requests for changes by submitting issues in this repo or by making proposed changes & submitting a pull request.
 
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
 
 ## Security
 
