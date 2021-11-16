@@ -32,15 +32,15 @@ AWS AppConfig supports JSON Schema version 4\.X for inline schema\. If your appl
 
 **AWS Lambda Validators**
 
-Lambda function validators must be configured with the following event schema\. AWS AppConfig uses this schema to invoke the Lambda function\. The content is a base64\-encoded string, and the URI is a string\. 
+Lambda function validators must be configured to expect the following event schema\. The content is a base64\-encoded string, and the URI is a string\. 
 
 ```
 {
-    "ApplicationId": "The application Id of the configuration profile being validated", 
-    "ConfigurationProfileId": "The configuration profile Id of the configuration profile being validated",
-    "ConfigurationVersion": "The configuration version of the configuration profile being validated",
-    "Content": "Base64EncodedByteString", 
-    "Uri": "The uri of the configuration"    
+    "applicationId": "The application Id of the configuration profile being validated", 
+    "configurationProfileId": "The configuration profile Id of the configuration profile being validated",
+    "configurationVersion": "The configuration version of the configuration profile being validated",
+    "content": "Base64EncodedByteString", 
+    "uri": "The uri of the configuration"    
 }
 ```
 
