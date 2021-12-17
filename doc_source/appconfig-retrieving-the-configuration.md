@@ -1,45 +1,51 @@
 # Step 6: Receiving the configuration<a name="appconfig-retrieving-the-configuration"></a>
 
-You must configure a client to receive configuration updates by integrating with the [GetConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetConfiguration.html) API action\. You can integrate using the AWS SDK\. The following AWS CLI command demonstrates how to receive a configuration\. This call includes the IDs of the AWS AppConfig application, the environment, the configuration profile, and a unique client ID\. The configuration content is saved to the output filename\. 
+To retrieve a deployed configuration, you must start a Configuration Session\. The following AWS CLI command demonstrates how to start a Configuration Session\. This call includes the IDs \(or names\) of the AWS AppConfig application, the environment, and the configuration profile\. The API returns an `InitialConfigurationToken` used to fetch your configuration data\.
 
 **Note**  
-The `client-id` parameter in the following command is a unique, user\-specified ID to identify the client for the configuration\. This ID enables AWS AppConfig to deploy the configuration in intervals, as defined in the deployment strategy\. 
+The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
 
 ```
-aws appconfig get-configuration \
-    --application application_name_or_ID \
-    --environment environment_name_or_ID \
-    --configuration configuration_profile_name_or_ID \
-    --client-id client_ID \
-output_filename
+aws appconfigdata start-configuration-session \
+    --application-identifier application_name_or_ID \
+    --environment-identifier environment_name_or_ID \
+    --configuration-profile-identifier configuration_profile_name_or_ID
 ```
 
 The system responds with information in the following format\.
 
 ```
 {
-   "ConfigurationVersion":"configuration version",
-   "ContentType":"content type"
+   "InitialConfigurationToken": initial configuration token
 }
 ```
 
+ After starting a session, use [InitialConfigurationToken](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html#API_StartConfigurationSession_ResponseSyntax) to call [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) to fetch your configuration data\. The configuration data is saved to the `mydata.json` file\.
+
+```
+aws appconfigdata get-latest-configuration \
+    --configuration-token initial configuration token mydata.json
+```
+
+ The first call to `GetLatestConfiguration` uses the `ConfigurationToken` obtained from `StartConfigurationSession`\. The following information is returned\.
+
+```
+{
+    "NextPollConfigurationToken" : next configuration token,
+    "ContentType" : content type of configuration,
+    "NextPollIntervalInSeconds" : 60
+}
+```
+
+Subsequent calls to `GetLatestConfiguration` MUST provide `NextPollConfigurationToken` from the previous response\.
+
+```
+aws appconfigdata get-latest-configuration \
+    --configuration-token next configuration token mydata.json
+```
+
 **Important**  
-Note the following important details about the `GetConfiguration` API action:  
-The `GetConfiguration` response includes a `Content` section that shows the configuration data\. The `Content` section only appears if the system finds new or updated configuration data\. If the system doesn't find new or updated configuration data, then the `Content` section is not returned \(`Null`\)\.
-AWS AppConfig uses the value of the `ClientConfigurationVersion` parameter to identify the configuration version on your clients\. If you don’t send `ClientConfigurationVersion` with each call to `GetConfiguration`, your clients receive the current configuration\. You are charged each time your clients receive a configuration\.
-To avoid excess charges, we recommend that you include the `ClientConfigurationVersion` value with every call to `GetConfiguration`\. This value must be saved on your client\. Subsequent calls to `GetConfiguration` must pass this value by using the `ClientConfigurationVersion` parameter, as shown here\. 
-
-Sending `ConfigurationVersion` during subsequent polling for configuration updates is similar to the concept of [HTTP ETags](https://en.wikipedia.org/wiki/HTTP_ETag)\.
-
-```
-aws appconfig get-configuration \
-    --application application_name_or_ID \
-    --environment environment_name_or_ID \
-    --configuration configuration_profile_name_or_ID \
-    --client-configuration-version previous_configuration_version_value \
-    --client-id client_ID \
-output_filename
-```
-
-**Note**  
-We recommend tuning the polling frequency of your `GetConfiguration` API calls based on your budget, the expected frequency of your configuration deployments, and the number of targets for a configuration\.
+Note the following important details about the `GetLatestConfiguration` API action:  
+The `GetLatestConfiguration` response includes a `Configuration` section that shows the configuration data\. The `Configuration` section only appears if the system finds new or updated configuration data\. If the system doesn't find new or updated configuration data, then the `Configuration` data is empty\. 
+You receive a new `ConfigurationToken` in every response from `GetLatestConfiguration`\.
+We recommend tuning the polling frequncy of your `GetLatestConfiguration` API calls based on your budget, the expected frequency of your configuration deployments, and the number of targets for a configuration\.

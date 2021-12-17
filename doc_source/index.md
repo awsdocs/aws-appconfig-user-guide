@@ -23,7 +23,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Working with AWS AppConfig](appconfig-working.md)
    + [Step 1: Creating an AWS AppConfig application](appconfig-creating-application.md)
    + [Step 2: Creating an environment](appconfig-creating-environment.md)
-   + [Step 3: Creating a configuration and a configuration profile](appconfig-creating-configuration-and-profile.md)
+   + [Step 3: Creating configuration profiles and feature flags](appconfig-creating-configuration-and-profile.md)
       + [About the configuration profile IAM role](appconfig-creating-configuration-and-profile-iam-role.md)
       + [About configurations stored in Amazon S3](appconfig-creating-configuration-and-profile-S3-source.md)
       + [About validators](appconfig-creating-configuration-and-profile-validators.md)

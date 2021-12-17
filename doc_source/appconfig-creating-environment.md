@@ -23,17 +23,15 @@ Use the following procedure to create an AWS AppConfig environment by using the 
 
 1. For **Description**, enter information about the environment\.
 
-1. In the **Monitors** section, choose **Enable rollback on CloudWatch Alarms** if you want AWS AppConfig to roll back a configuration when an alarm is triggered\.
-
 1. In the **IAM role** list, choose the IAM role with permission to roll back a configuration when an alarm is triggered\.
 
-1. In the **CloudWatch alarms** list, choose one or more alarms to monitor\.
+1. In the **CloudWatch alarms** list, choose one or more alarms to monitor\. AWS AppConfig rolls back your configuration deployment if one of these alarms goes into an alarm state\.
 
 1. In the **Tags** section, enter a key and an optional value\. You can specify a maximum of 50 tags for a resource\. 
 
 1. Choose **Create environment**\.
 
-AWS AppConfig creates the environment and then displays the **Environment details** page\. Proceed to [Step 3: Creating a configuration and a configuration profile ](appconfig-creating-configuration-and-profile.md)\.
+AWS AppConfig creates the environment and then displays the **Environment details** page\. Proceed to [Step 3: Creating configuration profiles and feature flags](appconfig-creating-configuration-and-profile.md)\.
 
 ## Creating an AWS AppConfig environment \(commandline\)<a name="appconfig-creating-environment-commandline"></a>
 

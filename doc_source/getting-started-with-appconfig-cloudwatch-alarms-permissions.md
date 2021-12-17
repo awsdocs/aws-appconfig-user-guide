@@ -22,7 +22,7 @@ Use the following procedure to create an IAM policy that gives AWS AppConfig per
 
 1. On the **Create policy** page, choose the **JSON** tab\.
 
-1. Replace the default content on the JSON tab with the following permission policy, and then choose **Review**\.
+1. Replace the default content on the JSON tab with the following permission policy, and then choose **Next: Tags**\.
 
    ```
    {
@@ -39,7 +39,9 @@ Use the following procedure to create an IAM policy that gives AWS AppConfig per
        }
    ```
 
-1. On the **Review** page, enter **SSMCloudWatchAlarmDiscoveryRole** in the **Role name** field\. 
+1. Enter tags for this role, and then choose **Next: Review**\.
+
+1. On the **Review** page, enter **SSMCloudWatchAlarmDiscoveryPolicy** in the **Name** field\. 
 
 1. Choose **Create policy**\. The system returns you to the **Policies** page\.
 
@@ -57,13 +59,13 @@ Use the following procedure to create an IAM role and assign the policy you crea
 
 1. Immediately under **Choose the service that will use this role**, choose **EC2: Allows EC2 instances to call AWS services on your behalf**, and then choose **Next: Permissions**\.
 
-1. On the **Attached permissions policy** page, search for **SSMCloudWatchAlarmDiscoveryRole**\. 
+1. On the **Attached permissions policy** page, search for **SSMCloudWatchAlarmDiscoveryPolicy**\. 
 
 1. Choose this policy and then choose **Next: Tags**\.
 
 1. Enter tags for this role, and then choose **Next: Review**\.
 
-1. On the **Create role** page, enter a name in the **Role name** field, and then choose **Create role**\.
+1. On the **Create role** page, enter **SSMCloudWatchAlarmDiscoveryRole** in the **Role name** field, and then choose **Create role**\.
 
 1. On the **Roles** page, choose the role you just created\. The **Summary** page opens\. 
 

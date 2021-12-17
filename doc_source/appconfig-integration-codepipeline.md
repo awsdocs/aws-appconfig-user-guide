@@ -7,4 +7,4 @@ The integration of AWS AppConfig with CodePipeline offers the following benefits
 + Customers who want to use AWS AppConfig to manage configuration deployments but are limited because AWS AppConfig does not support their current code or configuration store, now have additional options\. CodePipeline supports AWS CodeCommit, GitHub, and BitBucket \(to name a few\)\.
 
 **Note**  
- AWS AppConfig integration with CodePipeline is only supported in AWS Regions where CodePipeline is [available](aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\.
+ AWS AppConfig integration with CodePipeline is only supported in AWS Regions where CodePipeline is [available](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\.
