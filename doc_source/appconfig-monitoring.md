@@ -1,0 +1,3 @@
+# Monitoring AWS AppConfig<a name="appconfig-monitoring"></a>
+
+Monitoring is an important part of maintaining the reliability, availability, and performance of your AWS solutions\. AWS AppConfig is a capability of AWS Systems Manager\. For information about monitoring Systems Manager capabilities, see [Monitoring AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring.html) in the *AWS Systems Manager User Guide*\.

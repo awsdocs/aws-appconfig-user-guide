@@ -1,6 +1,9 @@
 # \(Optional\) Configuring permissions for rollback based on CloudWatch alarms<a name="getting-started-with-appconfig-cloudwatch-alarms-permissions"></a>
 
-You can configure AWS AppConfig to roll back to a previous version of a configuration in response to one or more Amazon CloudWatch alarms\. When you configure a deployment to respond to CloudWatch alarms, you specify an AWS Identity and Access Management \(IAM\) role\. AWS AppConfig requires this role so that it can monitor CloudWatch alarms even if those alarms weren't created in the current AWS account\.
+You can configure AWS AppConfig to roll back to a previous version of a configuration in response to one or more Amazon CloudWatch alarms\. When you configure a deployment to respond to CloudWatch alarms, you specify an AWS Identity and Access Management \(IAM\) role\. AWS AppConfig requires this role so that it can monitor CloudWatch alarms\.
+
+**Note**  
+The IAM role must belong to the current account\. By default, AWS AppConfig can only monitor alarms owned by the current account\. If you want to configure AWS AppConfig to roll back deployments in response to metrics from a different account, you must configure cross account alarms\. For more information, see [Cross\-account cross\-Region CloudWatch console](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html) in the *Amazon CloudWatch User Guide*\.
 
 Use the following procedures to create an IAM role that enables AWS AppConfig to rollback based on CloudWatch alarms\. This section includes the following procedures\.
 

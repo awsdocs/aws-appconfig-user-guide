@@ -58,7 +58,7 @@ Use the following procedure to create a AWS AppConfig deployment strategy by usi
 1. Choose **Create deployment strategy**\.
 
 **Important**  
-If you created a configuration profile for AWS CodePipeline, then you must create a pipeline in CodePipeline that specifies AWS AppConfig as the *deploy provider*\. You don't need to perform [Step 5: Deploying a configuration](appconfig-deploying.md)\. However, you must configure a client to receive application configuration updates as described in [Step 6: Receiving the configuration](appconfig-retrieving-the-configuration.md)\. For information about creating a pipeline that specifies AWS AppConfig as the deploy provider, see [Tutorial: Create a Pipeline that Uses AWS AppConfig as a Deployment Provider](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-AppConfig.html) in the *AWS CodePipeline User Guide*\. 
+If you created a configuration profile for AWS CodePipeline, then you must create a pipeline in CodePipeline that specifies AWS AppConfig as the *deploy provider*\. You don't need to perform [Step 5: Deploying a configuration](appconfig-deploying.md)\. However, you must configure a client to receive application configuration updates as described in [Step 6: Retrieving the configuration](appconfig-retrieving-the-configuration.md)\. For information about creating a pipeline that specifies AWS AppConfig as the deploy provider, see [Tutorial: Create a Pipeline that Uses AWS AppConfig as a Deployment Provider](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-AppConfig.html) in the *AWS CodePipeline User Guide*\. 
 
 Proceed to [Step 5: Deploying a configuration](appconfig-deploying.md)\.
 

@@ -1,6 +1,9 @@
 # Step 1: Creating an AWS AppConfig application<a name="appconfig-creating-application"></a>
 
-An application in AWS AppConfig is a logical unit of code that provides capabilities for your customers\. For example, an application can be a microservice that runs on EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and AWS Lambda, or any system you run on behalf of others\. 
+In AWS AppConfig, an application is simply an organizational construct like a folder\. This organizational construct has a relationship with some unit of executable code\. For example, you could create an application called MyMobileApp to organize and manage configuration data for a mobile application installed by your users\.
+
+**Note**  
+You can use AWS CloudFormation to create AWS AppConfig artifacts, including applications, environments, configuration profiles, deployments, deployment strategies, and hosted configuration versions\. For more information, see [AWS AppConfig resource type reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_AppConfig.html) in the *AWS CloudFormation User Guide*\.
 
 ## Creating an AWS AppConfig application \(console\)<a name="appconfig-creating-application-console"></a>
 

@@ -6,4 +6,3 @@ The following topics describe important tasks for getting started with AWS AppCo
 + [Install or upgrade AWS command line tools](getting-started-cli.md)
 + [Configuring permissions for AWS AppConfig](getting-started-with-appconfig-permissions.md)
 + [\(Optional\) Configuring permissions for rollback based on CloudWatch alarms](getting-started-with-appconfig-cloudwatch-alarms-permissions.md)
-+ [Security in AWS AppConfig](appconfig-security.md)
