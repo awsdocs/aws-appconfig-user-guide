@@ -8,13 +8,18 @@ When calling `StartConfigurationSession`, your code sends the following informat
 
 In response, AWS AppConfig provides an `InitialConfigurationToken` to be given to the session's client and used the first time it calls `GetLatestConfiguration` for that session\.
 
+**Important**  
+This token should only be used once in your first call to `GetLatestConfiguration`\. You *must* use the new token in the `GetLatestConfiguration` response \(`NextPollConfigurationToken`\) in each subsequent call to `GetLatestConfiguration`\.
+
 When calling `GetLatestConfiguration`, your client code sends the most recent `ConfigurationToken` value it has and receives in response:
 + `NextPollConfigurationToken`: the `ConfigurationToken` value to use on the next call to `GetLatestConfiguration`\.
 + `NextPollIntervalInSeconds`: the duration the client should wait before making its next call to `GetLatestConfiguration`\. This duration may vary over the course of the session, so it should be used instead of the value sent on the `StartConfigurationSession` call\.
 + The configuration: the latest data intended for the session\. This may be empty if the client already has the latest version of the configuration\.
 
-**Note**  
+**Important**  
+Note the following important information\.  
 The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
+The `InitialConfigurationToken` and `NextPollConfigurationToken` expire after 24 hours\. If a `GetLatestConfiguration` call uses an expired token, the system returns `BadRequestException`\.
 
 ## Retrieving a configuration example<a name="appconfig-retrieving-the-configuration-example"></a>
 
