@@ -12,7 +12,7 @@ You can package your AWS AppConfig Lambda extension as a container image to uplo
      --arn arn:aws:lambda::layer:AWS-AppConfig-Extension:00
    ```
 
-    Following is the response\.
+   Following is the response\.
 
    ```
    {

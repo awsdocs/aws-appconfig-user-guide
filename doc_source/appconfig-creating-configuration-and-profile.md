@@ -441,13 +441,15 @@ AWS AppConfig calls your validation Lambda when calling the `StartDeployment` an
 
 ## Creating a feature flag configuration profile<a name="appconfig-creating-configuration-and-profile-feature-flags"></a>
 
-**Note**  
-The AWS AppConfig feature flag configuration profile type is in preview release and is subject to change\.
-
 You can use feature flags to enable or disable features within your applications or to configure different characteristics of your application features using flag attributes\. AWS AppConfig stores feature flag configurations in the AWS AppConfig hosted configuration store in a feature flag format that contains data and metadata about your flags and the flag attributes\. For more information about the AWS AppConfig hosted configuration store, see [About the AWS AppConfig hosted configuration store](#appconfig-creating-configuration-and-profile-about-hosted-store) section\.
 
 **Important**  
-To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
+To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
+
+**Topics**
++ [Creating a feature flag and a feature flag configuration profile \(console\)](#appconfig-creating-feature-flag-configuration-create-console)
++ [Creating a feature flag and a feature flag configuration profile \(commandline\)](#appconfig-creating-feature-flag-configuration-commandline)
++ [Type reference for AWS\.AppConfig\.FeatureFlags](#appconfig-type-reference-feature-flags)
 
 ### Creating a feature flag and a feature flag configuration profile \(console\)<a name="appconfig-creating-feature-flag-configuration-create-console"></a>
 
@@ -484,6 +486,457 @@ Use the following procedure to create an AWS AppConfig feature flag configuratio
 1. Choose **Save new version**\.
 
 Proceed to Step 4: Creating a deployment strategy\.
+
+### Creating a feature flag and a feature flag configuration profile \(commandline\)<a name="appconfig-creating-feature-flag-configuration-commandline"></a>
+
+The following procedure describes how to use the AWS Command Line Interface \(on Linux or Windows\) or Tools for Windows PowerShell to create an AWS AppConfig feature flag configuration profile\. If you prefer, you can use AWS CloudShell to run the commands listed below\. For more information, see [What is AWS CloudShell?](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html) in the *AWS CloudShell User Guide*\.
+
+**To create a feature flags configuration step by step**
+
+1. Install and configure the AWS CLI or the AWS Tools for PowerShell, if you have not already\.
+
+   For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+
+1. Create a feature flag configuration profile specifying its **Type** as `AWS.AppConfig.FeatureFlags`\. The configuration profile must use `hosted` for the location URI\.
+
+------
+#### [ Linux ]
+
+   ```
+   aws appconfig create-configuration-profile \
+     --application-id The_application_ID \
+     --name A_name_for_the_configuration_profile \
+     --location-uri hosted \
+     --type AWS.AppConfig.FeatureFlags
+   ```
+
+------
+#### [ Windows ]
+
+   ```
+   aws appconfig create-configuration-profile ^
+     --application-id The_application_ID ^
+     --name A_name_for_the_configuration_profile ^
+     --location-uri hosted ^
+     --type AWS.AppConfig.FeatureFlags
+   ```
+
+------
+#### [ PowerShell ]
+
+   ```
+   New-APPCConfigurationProfile `
+     -Name A_name_for_the_configuration_profile `
+     -ApplicationId The_application_ID `
+     -LocationUri hosted `
+     -Type AWS.AppConfig.FeatureFlags
+   ```
+
+------
+
+1. Create your feature flag configuration data\. Your data must be in a JSON format and conform to the `AWS.AppConfig.FeatureFlags` JSON schema\. For more information about the schema, see [Type reference for AWS\.AppConfig\.FeatureFlags](#appconfig-type-reference-feature-flags)\.
+
+1. Use the `CreateHostedConfigurationVersion` API to save your feature flag configuration data to AWS AppConfig\.
+
+------
+#### [ Linux ]
+
+   ```
+   aws appconfig create-hosted-configuration-version \
+     --application-id The_application_ID \
+     --configuration-profile-id The_configuration_profile_id \
+     --content-type "application/json" \
+     --content file://path/to/feature_flag_configuration_data \
+     file_name_for_system_to_store_configuration_data
+   ```
+
+------
+#### [ Windows ]
+
+   ```
+   aws appconfig create-hosted-configuration-version ^
+     --application-id The_application_ID ^
+     --configuration-profile-id The_configuration_profile_id ^
+     --content-type "application/json" ^
+     --content file://path/to/feature_flag_configuration_data ^
+     file_name_for_system_to_store_configuration_data
+   ```
+
+------
+#### [ PowerShell ]
+
+   ```
+   New-APPCHostedConfigurationVersion `
+     -ApplicationId The_application_ID `
+     -ConfigurationProfileId The_configuration_profile_id `
+     -ContentType "application/json" `
+     -Content file://path/to/feature_flag_configuration_data `
+     file_name_for_system_to_store_configuration_data
+   ```
+
+------
+
+   The system returns information like the following\.
+
+------
+#### [ Linux ]
+
+   ```
+   {
+      "ApplicationId"          : "The application ID",
+      "ConfigurationProfileId" : "The configuration profile ID",
+      "VersionNumber"          : "The configuration version number",
+      "ContentType"            : "application/json"
+   }
+   ```
+
+------
+#### [ Windows ]
+
+   ```
+   {
+      "ApplicationId"          : "The application ID",
+      "ConfigurationProfileId" : "The configuration profile ID",
+      "VersionNumber"          : "The configuration version number",
+      "ContentType"            : "application/json"
+   }
+   ```
+
+------
+#### [ PowerShell ]
+
+   ```
+   ApplicationId          : The application ID
+   ConfigurationProfileId : The configuration profile ID
+   VersionNumber          : The configuration version number
+   ContentType            : application/json
+   ```
+
+------
+
+   The `service_returned_content_file` contains your configuration data that includes some AWS AppConfig generated metadata\.
+**Note**  
+When you create the hosted configuration version, AWS AppConfig verifies that your data conforms to the `AWS.AppConfig.FeatureFlags` JSON schema\. AWS AppConfig additionally validates that each feature flag attribute in your data satisfies the constraints you defined for those attributes\.
+
+### Type reference for AWS\.AppConfig\.FeatureFlags<a name="appconfig-type-reference-feature-flags"></a>
+
+Use the `AWS.AppConfig.FeatureFlags` JSON schema as a reference to create your feature flag configuration data\.
+
+```
+ {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "$ref": "#/definitions/flagSetDefinition",
+  "additionalProperties": false,
+  "definitions": {
+    "flagSetDefinition": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/flagSchemaVersions"
+        },
+        "flags": {
+          "$ref": "#/definitions/flagDefinitions"
+        },
+        "values": {
+          "$ref": "#/definitions/flagValues"
+        }
+      },
+      "required": ["version", "flags"],
+      "additionalProperties": false
+    },
+    "flagDefinitions": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+          "$ref": "#/definitions/flagDefinition"
+        }
+      },
+      "maxProperties": 100,
+      "additionalProperties": false
+    },
+    "flagDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/customerDefinedName"
+        },
+        "description": {
+          "$ref": "#/definitions/customerDefinedDescription"
+        },
+        "_createdAt": {
+          "type": "string"
+        },
+        "_updatedAt": {
+          "type": "string"
+        },
+        "attributes": {
+          "$ref": "#/definitions/attributeDefinitions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "attributeDefinitions": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+          "$ref": "#/definitions/attributeDefinition"
+        }
+      },
+      "maxProperties": 25,
+      "additionalProperties": false
+    },
+    "attributeDefinition": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/customerDefinedDescription"
+        },
+        "constraints": {
+          "oneOf": [
+            { "$ref": "#/definitions/numberConstraints" },
+            { "$ref": "#/definitions/stringConstraints" },
+            { "$ref": "#/definitions/arrayConstraints" },
+            { "$ref": "#/definitions/boolConstraints" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "flagValues": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+          "$ref": "#/definitions/flagValue"
+        }
+      },
+      "maxProperties": 100,
+      "additionalProperties": false
+    },
+    "flagValue": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "_createdAt": {
+          "type": "string"
+        },
+        "_updatedAt": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+          "$ref": "#/definitions/attributeValue",
+          "maxProperties": 25
+        }
+      },
+      "required": ["enabled"],
+      "additionalProperties": false
+    },
+    "attributeValue": {
+      "oneOf": [
+        { "type": "string", "maxLength": 1024 },
+        { "type": "number" },
+        { "type": "boolean" },
+        {
+          "type": "array",
+          "oneOf": [
+            {
+              "items": {
+                "type": "string",
+                "maxLength": 1024
+              }
+            },
+            {
+              "items": {
+                "type": "number"
+              }
+            }
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "stringConstraints": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["string"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "pattern": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "enum": {
+          "type": "array",
+          "type": "array",
+          "maxLength": 100,
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 1024
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          }
+        }
+      },
+      "required": ["type"],
+      "not": {
+        "required": ["pattern", "enum"]
+      },
+      "additionalProperties": false
+    },
+    "numberConstraints": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["number"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "minimum": {
+          "type": "integer"
+        },
+        "maximum": {
+          "type": "integer"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "arrayConstraints": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["array"]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "elements": {
+          "$ref": "#/definitions/elementConstraints"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "boolConstraints": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["boolean"]
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "elementConstraints": {
+      "oneOf": [
+        { "$ref": "#/definitions/numberConstraints" },
+        { "$ref": "#/definitions/stringConstraints" }
+      ]
+    },
+    "customerDefinedName": {
+      "type": "string",
+      "pattern": "^[^\\n]{1,64}$"
+    },
+    "customerDefinedDescription": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "flagSchemaVersions": {
+      "type": "string",
+      "enum": ["1"]
+    }
+  }
+}
+```
+
+**Important**  
+To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
+
+When your application calls [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) and receives a newly deployed configuration, the information that defines your feature flags and attributes is removed\. The simplified JSON contains a map of keys that match each of the flag keys you specified\. The simplified JSON also contains mapped values of `true` or `false` for the `enabled` attribute\. If a flag sets `enabled` to `true`, any attributes of the flag will be present as well\. The following JSON schema describes the format of the JSON output\.
+
+```
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "patternProperties": {
+    "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+      "$ref": "#/definitions/attributeValuesMap"
+    }
+  },
+  "maxProperties": 100,
+  "additionalProperties": false,
+  "definitions": {
+    "attributeValuesMap": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": ["enabled"],
+      "patternProperties": {
+        "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+          "$ref": "#/definitions/attributeValue"
+        }
+      },
+      "maxProperties": 25,
+      "additionalProperties": false
+    },
+    "attributeValue": {
+      "oneOf": [
+        { "type": "string","maxLength": 1024 },
+        { "type": "number" },
+        { "type": "boolean" },
+        {
+          "type": "array",
+          "oneOf": [
+            {
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 1024
+                  }
+                ]
+              }
+            },
+            {
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}
+```
 
 ## Creating a freeform configuration profile<a name="appconfig-creating-configuration-and-profile-free-form-configurations"></a>
 

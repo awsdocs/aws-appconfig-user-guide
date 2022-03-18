@@ -2,16 +2,16 @@
 
 An AWS Lambda extension is a companion process that augments the capabilities of a Lambda function\. An extension can start before a function is invoked, run in parallel with a function, and continue to run after a function invocation is processed\. In essence, a Lambda extension is like a client that runs in parallel to a Lambda invocation\. This parallel client can interface with your function at any point during its lifecycle\.
 
-If you use AWS AppConfig to manage configurations for a Lambda function, then we recommend that you add the AWS AppConfig Lambda extension\. This extension includes best practices that simplify using AWS AppConfig while reducing costs\. Reduced costs result from fewer API calls to the AWS AppConfig service and, separately, reduced costs from shorter Lambda function processing times\.
-
-This topic includes information about the AWS AppConfig Lambda extension and the procedure for how to configure the extension to work with your Lambda function\. For more information about Lambda extensions, see [Lambda extensions](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html) in the *AWS Lambda Developer Guide*\.
+If you use AWS AppConfig feature flags or other dynamic configuration data in a Lambda function, then we recommend that you add the AWS AppConfig Lambda extension as a layer to your Lambda function\. This makes calling feature flags simpler, and the extension itself includes best practices that simplify using AWS AppConfig while reducing costs\. Reduced costs result from fewer API calls to the AWS AppConfig service and shorter Lambda function processing times\. For more information about Lambda extensions, see [Lambda extensions](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html) in the *AWS Lambda Developer Guide*\.
 
 **Note**  
-The AWS AppConfig Lambda extension currently doesn't support the ARM architecture\.
+AWS AppConfig [pricing](https://aws.amazon.com/systems-manager/pricing/) is based on the number of times a configuration is called and received\. You costs increase if your Lambda performs multiple cold starts and retrieves new configuration data frequently\. 
+
+This topic includes information about the AWS AppConfig Lambda extension and the procedure for how to configure the extension to work with your Lambda function\. 
 
 ## How it works<a name="appconfig-integration-lambda-extensions-how-it-works"></a>
 
-If you use AWS AppConfig to manage configurations for a Lambda function *without* Lambda extensions, then you must configure your Lambda function to receive configuration updates by integrating with the [https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html) and [https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) API actions\.
+If you use AWS AppConfig to manage configurations for a Lambda function *without* Lambda extensions, then you must configure your Lambda function to receive configuration updates by integrating with the [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) and [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) API actions\.
 
 Integrating the AWS AppConfig Lambda extension with your Lambda function simplifies this process\. The extension takes care of calling the AWS AppConfig service, managing a local cache of retrieved data, tracking the configuration tokens needed for the next service calls, and periodically checking for configuration updates in the background\. The following diagram shows how it works\.
 
@@ -42,41 +42,11 @@ Before you enable the AWS AppConfig Lambda extension, do the following:
 
 To use the AWS AppConfig Lambda extension, you need to add the extension to your Lambda\. This can be done by adding the AWS AppConfig Lambda extension to your Lambda function as a layer or by enabling the extension on a Lambda function as a container image\.
 
-### Using layer and ARN to add the AWS AppConfig Lambda extension<a name="appconfig-integration-lambda-extensions-enabling"></a>
+### Adding the AWS AppConfig Lambda extension by using a layer and an ARN<a name="appconfig-integration-lambda-extensions-enabling"></a>
 
-To use the AWS AppConfig Lambda extension, you add the extension to your Lambda function as a layer\. For information about how to add a layer to your function, see [Configuring extensions](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html#using-extensions-config) in the *AWS Lambda Developer Guide*\. The name of the extension in the AWS Lambda console is **AWS\-AppConfig\-Extension**\. Also note that when you add the extension as a layer to your Lambda, you must specify an Amazon Resource Name \(ARN\)\. Choose an ARN from the following list that corresponds with the AWS Region where you created the Lambda\.
-
-
-****  
-
-| Region | ARN | 
-| --- | --- | 
-|  US East \(N\. Virginia\)  | `arn:aws:lambda:us-east-1:027255383542:layer:AWS-AppConfig-Extension:61` | 
-|  US East \(Ohio\)  |  `arn:aws:lambda:us-east-2:728743619870:layer:AWS-AppConfig-Extension:47`  | 
-|  US West \(N\. California\)  |  `arn:aws:lambda:us-west-1:958113053741:layer:AWS-AppConfig-Extension:61`  | 
-|  US West \(Oregon\)  |  `arn:aws:lambda:us-west-2:359756378197:layer:AWS-AppConfig-Extension:89`  | 
-|  Canada \(Central\)  |  `arn:aws:lambda:ca-central-1:039592058896:layer:AWS-AppConfig-Extension:47`  | 
-|  Europe \(Frankfurt\)  |  `arn:aws:lambda:eu-central-1:066940009817:layer:AWS-AppConfig-Extension:54`  | 
-|  Europe \(Ireland\)  |  `arn:aws:lambda:eu-west-1:434848589818:layer:AWS-AppConfig-Extension:59` | 
-|  Europe \(London\)  |  `arn:aws:lambda:eu-west-2:282860088358:layer:AWS-AppConfig-Extension:47`  | 
-|  Europe \(Paris\)  |  `arn:aws:lambda:eu-west-3:493207061005:layer:AWS-AppConfig-Extension:48`  | 
-|  Europe \(Stockholm\)  |  `arn:aws:lambda:eu-north-1:646970417810:layer:AWS-AppConfig-Extension:86`  | 
-|  Europe \(Milan\)  |  `arn:aws:lambda:eu-south-1:203683718741:layer:AWS-AppConfig-Extension:44`  | 
-| China \(Bejing\) | `arn:aws-cn:lambda:cn-north-1:615057806174:layer:AWS-AppConfig-Extension:43` | 
-| China \(Ningxia\) | `arn:aws-cn:lambda:cn-northwest-1:615084187847:layer:AWS-AppConfig-Extension:43` | 
-|  Asia Pacific \(Hong Kong\)  |  `arn:aws:lambda:ap-east-1:630222743974:layer:AWS-AppConfig-Extension:44`  | 
-|  Asia Pacific \(Tokyo\)  | `arn:aws:lambda:ap-northeast-1:980059726660:layer:AWS-AppConfig-Extension:45` | 
-| Asia Pacific \(Osaka\) | `arn:aws:lambda:ap-northeast-3:706869817123:layer:AWS-AppConfig-Extension:42` | 
-|  Asia Pacific \(Seoul\)  | `arn:aws:lambda:ap-northeast-2:826293736237:layer:AWS-AppConfig-Extension:54` | 
-|  Asia Pacific \(Singapore\)  | `arn:aws:lambda:ap-southeast-1:421114256042:layer:AWS-AppConfig-Extension:45` | 
-|  Asia Pacific \(Sydney\)  |  `arn:aws:lambda:ap-southeast-2:080788657173:layer:AWS-AppConfig-Extension:54`  | 
-| Asia Pacific \(Jakarta\) | `arn:aws:lambda:ap-southeast-3:418787028745:layer:AWS-AppConfig-Extension:13` | 
-|  Asia Pacific \(Mumbai\)  |  `arn:aws:lambda:ap-south-1:554480029851:layer:AWS-AppConfig-Extension:55`  | 
-|  South America \(São Paulo\)  | `arn:aws:lambda:sa-east-1:000010852771:layer:AWS-AppConfig-Extension:61` | 
-|  Africa \(Cape Town\)  |  `arn:aws:lambda:af-south-1:574348263942:layer:AWS-AppConfig-Extension:44`  | 
-|  Middle East \(Bahrain\)  |  `arn:aws:lambda:me-south-1:559955524753:layer:AWS-AppConfig-Extension:44`  | 
-| AWS GovCloud \(US\-East\) | `arn:aws-us-gov:lambda:us-gov-east-1:946561847325:layer:AWS-AppConfig-Extension:20` | 
-| AWS GovCloud \(US\-West\) | `arn:aws-us-gov:lambda:us-gov-west-1:946746059096:layer:AWS-AppConfig-Extension:20` | 
+To use the AWS AppConfig Lambda extension, you add the extension to your Lambda function as a layer\. For information about how to add a layer to your function, see [Configuring extensions](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html#using-extensions-config) in the *AWS Lambda Developer Guide*\. The name of the extension in the AWS Lambda console is **AWS\-AppConfig\-Extension**\. Also note that when you add the extension as a layer to your Lambda, you must specify an Amazon Resource Name \(ARN\)\. Choose an ARN from one of the following lists that corresponds with the platform and AWS Region where you created the Lambda\.
++ [x86\-64 platform](appconfig-integration-lambda-extensions-versions.md#appconfig-integration-lambda-extensions-enabling-x86-64)
++ [ARM64 platform](appconfig-integration-lambda-extensions-versions.md#appconfig-integration-lambda-extensions-enabling-ARM64)
 
 If you want to test the extension before you add it to your function, you can verify that it works by using the following code example\.
 
@@ -94,7 +64,7 @@ To test it, create a new Lambda function for Python, add the extension, and then
 
 To add the AWS AppConfig Lambda extension as a container image, see [Using a container image to add the AWS AppConfig Lambda extension](appconfig-integration-lambda-extensions-container-image.md)\.
 
-## Configuring AWS AppConfig Lambda extension<a name="appconfig-integration-lambda-extensions-config"></a>
+## Configuring the AWS AppConfig Lambda extension<a name="appconfig-integration-lambda-extensions-config"></a>
 
 You can configure the extension by changing the following AWS Lambda environment variables\. For more information, see [Using AWS Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in the *AWS Lambda Developer Guide*\. 
 
@@ -115,10 +85,9 @@ The AWS AppConfig Lambda extension can retrieve configuration data from another 
 1. \(Optional\) If needed, an [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) can be specified using the `AWS_APPCONFIG_EXTENSION_ROLE_EXTERNAL_ID` environment variable\. Similarly, a session name can be configured using the `AWS_APPCONFIG_EXTENSION_ROLE_SESSION_NAME` environment variable\.
 
 **Note**  
+Note the following information\.  
 The AWS AppConfig Lambda extension can only retrieve data from one account\. If you specify an IAM role, the extension will not be able to retrieve configuration data from the account in which the Lambda function is running\.
-
-**Note**  
-AWS Lambda logs execution information about the AWS AppConfig Lambda extension along with the Lambda function by using Amazon CloudWatch Logs\. 
+AWS Lambda logs information about the AWS AppConfig Lambda extension and the Lambda function by using Amazon CloudWatch Logs\. 
 
 
 ****  
@@ -136,4 +105,33 @@ AWS Lambda logs execution information about the AWS AppConfig Lambda extension a
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_SESSION\_NAME | This environment variable specifies the session name to be associated with the credentials for the assumed IAM role\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_SERVICE\_REGION | This environment variable specifies an alternative region the extension should use to call the AWS AppConfig service\. When undefined, the extension uses the endpoint in the current region\. | None | 
 
-## <a name="appconfig-integration-lambda-extensions-enabling"></a>
+## Retrieving one or more flags from a feature flag configuration<a name="appconfig-integration-lambda-extensions-retrieving-flags"></a>
+
+For feature flag configurations \(configurations of type `AWS.AppConfig.FeatureFlags`\), the Lambda extension enables you to retrieve a single flag or a subset of flags in a configuration\. Retrieving one or two flags is useful if your Lambda only needs to use a few flags from the configuration profile\. The following examples use Python\.
+
+**Note**  
+The ability to call a single feature flag or a subset of flags in a configuration is only available in the AWS AppConfig Lambda extension version 2\.0\.45 and higher\.
+
+You can retrieve AWS AppConfig configuration data from a local HTTP endpoint\. To access a specific flag or a list of flags, use the `?flag=flag_name` query parameter for an AWS AppConfig configuration profile\.
+
+**To access a single flag and its attributes**
+
+```
+import urllib.request
+
+def lambda_handler(event, context):
+    url = f'http://localhost:2772/applications/application_name/environments/environment_name/configurations/configuration_name?flag=flag_name'
+    config = urllib.request.urlopen(url).read()
+    return config
+```
+
+**To access a multiple flags and their attributes**
+
+```
+import urllib.request
+
+def lambda_handler(event, context):
+    url = f'http://localhost:2772/applications/application_name/environments/environment_name/configurations/configuration_name?flag=flag_name_one&flag=flag_name_two'
+    config = urllib.request.urlopen(url).read()
+    return config
+```

@@ -1,6 +1,6 @@
 # Step 6: Retrieving the configuration<a name="appconfig-retrieving-the-configuration"></a>
 
-Your application retrieves configuration data by first establishing a configuration session using the [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html) API action\. Your session's client then makes periodic calls to [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) to check for and retrieve the latest data available\.
+Your application retrieves configuration data by first establishing a configuration session using the [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API action\. Your session's client then makes periodic calls to [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) to check for and retrieve the latest data available\.
 
 When calling `StartConfigurationSession`, your code sends the following information:
 + Identifiers \(ID or name\) of an AWS AppConfig application, environment, and configuration profile that the session tracks\.
@@ -18,7 +18,7 @@ When calling `GetLatestConfiguration`, your client code sends the most recent `C
 
 **Important**  
 Note the following important information\.  
-The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
+The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
 The `InitialConfigurationToken` and `NextPollConfigurationToken` expire after 24 hours\. If a `GetLatestConfiguration` call uses an expired token, the system returns `BadRequestException`\.
 
 ## Retrieving a configuration example<a name="appconfig-retrieving-the-configuration-example"></a>
@@ -40,7 +40,7 @@ The system responds with information in the following format\.
 }
 ```
 
-After starting a session, use [InitialConfigurationToken](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartConfigurationSession.html#API_StartConfigurationSession_ResponseSyntax) to call [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) to fetch your configuration data\. The configuration data is saved to the `mydata.json` file\.
+After starting a session, use [InitialConfigurationToken](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html#API_appconfigdata_StartConfigurationSession_ResponseSyntax) to call [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) to fetch your configuration data\. The configuration data is saved to the `mydata.json` file\.
 
 ```
 aws appconfigdata get-latest-configuration \

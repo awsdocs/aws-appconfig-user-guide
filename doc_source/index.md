@@ -29,6 +29,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Services that integrate with AWS AppConfig](appconfig-integration.md)
    + [AWS AppConfig integration with CodePipeline](appconfig-integration-codepipeline.md)
    + [AWS AppConfig integration with Lambda extensions](appconfig-integration-lambda-extensions.md)
+      + [Available versions of the AWS AppConfig Lambda extension](appconfig-integration-lambda-extensions-versions.md)
       + [Using a container image to add the AWS AppConfig Lambda extension](appconfig-integration-lambda-extensions-container-image.md)
       + [Integrating with OpenAPI](appconfig-integration-lambda-extensions-OpenAPI.md)
 + [Security in AWS AppConfig](appconfig-security.md)
