@@ -63,7 +63,7 @@ Use the following procedure to create an IAM permissions policy that allows Atla
                           
                 ],
                "Resource": [
-                          "arn:aws:appconfig:Region:account_ID:application/*"
+                          "arn:aws:appconfig:Region:account_ID:*"
                 ]
            },
             {
