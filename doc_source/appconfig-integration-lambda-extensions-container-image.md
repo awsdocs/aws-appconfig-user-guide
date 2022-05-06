@@ -32,7 +32,6 @@ You can package your AWS AppConfig Lambda extension as a container image to uplo
        "python3.8",
        "python3.7",
        "nodejs12.x",
-       "nodejs10.x",
        "ruby2.7"
      ],
    }

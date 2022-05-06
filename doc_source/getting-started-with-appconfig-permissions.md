@@ -18,6 +18,8 @@ For example, you can create a read\-only IAM permissions policy that includes on
       "Action": [
         "ssm:GetDocument",
         "ssm:ListDocuments",
+        "appconfig:GetLatestConfiguration",
+        "appconfig:StartConfigurationSession",
         "appconfig:ListApplications",
         "appconfig:GetApplication",
         "appconfig:ListEnvironments",
