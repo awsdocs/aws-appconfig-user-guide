@@ -1,0 +1,3 @@
+# AWS AppConfig integration with Jira<a name="appconfig-integration-ref-jira"></a>
+
+AWS AppConfig integrates with Atlassian Jira\. Integration allows AWS AppConfig to create and update issues in the Atlassian console whenever you make changes to a feature flag in your AWS account for the specified AWS Region\. Each Jira issue includes the flag name, application ID, configuration profile ID, and flag values\. After you update, save, and deploy your flag changes, Jira updates the existing issues with the details of the change\. For more information, see [Working with the Atlassian Jira extension for AWS AppConfig](working-with-appconfig-extensions-about-jira.md)\.

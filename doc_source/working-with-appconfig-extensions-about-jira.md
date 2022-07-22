@@ -1,4 +1,4 @@
-# AWS AppConfig integration with Atlassian Jira<a name="appconfig-integration-jira"></a>
+# Working with the Atlassian Jira extension for AWS AppConfig<a name="working-with-appconfig-extensions-about-jira"></a>
 
 Integrating with Atlassian Jira allows AWS AppConfig to create and update issues in the Atlassian console whenever you make changes to a [feature flag](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html#appconfig-creating-configuration-and-profile-feature-flags) in your AWS account for the specified AWS Region\. Each Jira issue includes the flag name, application ID, configuration profile ID, and flag values\. After you update, save, and deploy your flag changes, Jira updates the existing issues with the details of the change\.
 
@@ -6,28 +6,28 @@ Integrating with Atlassian Jira allows AWS AppConfig to create and update issues
 Jira updates issues whenever you create or update a feature flag\. Jira also updates issues when you delete a child\-level flag attribute from a parent\-level flag\. Jira does not record information when you delete a parent\-level flag\.
 
 To configure integration, you must do the following:
-+ [Configure permissions](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-jira-permissions.html)
-+ [Configure integration](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-jira-configure.html)
++ [Configure permissions](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions-about-jira-permissions.html)
++ [Configure integration](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions-about-jira-configure.html)
 
-## Configuring permissions for AWS AppConfig Jira integration<a name="appconfig-integration-jira-permissions"></a>
+## Configuring permissions for AWS AppConfig Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions"></a>
 
 When you configure AWS AppConfig integration with Jira, you specify credentials for an AWS Identity and Access Management \(IAM\) user\. Specifically, you enter the user's access key ID and secret key in the AWS AppConfig for Jira application\. This user gives Jira permission to communicate with AWS AppConfig\. AWS AppConfig uses these credentials one time to establish an association between AWS AppConfig and Jira\. The credentials are not stored\. You can remove the association by uninstalling the AWS AppConfig for Jira application\.
 
 The IAM user account requires a permissions policy that includes the following actions:
-+ `appconfig:AssociateExtension`
++ `appconfig:CreateExtensionAssociation`
 + `appconfig:GetConfigurationProfile`
 + `appconfig:ListApplications`
 + `appconfig:ListConfigurationProfiles`
-+ `appconfig:UpdateConfigurationProfile`
++ `appconfig:ListExtensionAssociations`
 + `sts:GetCallerIdentity`
 
 Complete the following tasks to create an IAM permissions policy and an IAM user for AWS AppConfig and Jira integration:
 
 **Tasks**
-+ [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#appconfig-integration-jira-permissions-policy)
-+ [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#appconfig-integration-jira-permissions-user)
++ [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy)
++ [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)
 
-### Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration<a name="appconfig-integration-jira-permissions-policy"></a>
+### Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-policy"></a>
 
 Use the following procedure to create an IAM permissions policy that allows Atlassian Jira to communicate with AWS AppConfig\. We recommend that you create a new policy and attach this policy to a new IAM role\. Adding the required permissions to an existing IAM policy and role goes against the principle of least privilege and is not recommended\. 
 
@@ -92,7 +92,7 @@ Use the following procedure to create an IAM permissions policy that allows Atla
 
 1. Choose **Create policy**\.
 
-### Task 2: Create an IAM user for AWS AppConfig and Jira integration<a name="appconfig-integration-jira-permissions-user"></a>
+### Task 2: Create an IAM user for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-user"></a>
 
 Use the following procedure to create an IAM user for AWS AppConfig and Atlassian Jira integration\. After you create the user, you can copy the access key ID and secret key, which you will specify when you complete the integration\.
 
@@ -108,7 +108,7 @@ Use the following procedure to create an IAM user for AWS AppConfig and Atlassia
 
 1. Choose **Next: Permissions**\.
 
-1. Under **Set permissions** page, choose **Attach existing policies directly**\. Search for and select the check box for the policy that you created in [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#appconfig-integration-jira-permissions-policy), and then choose **Next: Tags**\.
+1. Under **Set permissions** page, choose **Attach existing policies directly**\. Search for and select the check box for the policy that you created in [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy), and then choose **Next: Tags**\.
 
 1. On the **Add tags \(optional\)** page, add one or more tag\-key value pairs to organize, track, or control access for this user\. Choose **Next: Review**\.
 
@@ -116,7 +116,7 @@ Use the following procedure to create an IAM user for AWS AppConfig and Atlassia
 
 1. Choose **Create user**\. The system displays the user's access key ID and secret key\. Either download the \.csv file or copy these credentials to a separate location\. You will specify these credentials when you configure integration\.
 
-## Configuring the AWS AppConfig Jira integration application<a name="appconfig-integration-jira-configure"></a>
+## Configuring the AWS AppConfig Jira integration application<a name="working-with-appconfig-extensions-about-jira-configure"></a>
 
 Use the following procedure to configure required options in the AWS AppConfig for Jira application\. After you complete this procedure, Jira creates a new issue for each feature flag in your AWS account for the specified AWS Region\. If you make changes to a feature flag in AWS AppConfig, Jira records the details in the existing issues\.
 
@@ -143,13 +143,13 @@ An AWS AppConfig feature flag can include multiple child\-level flag attributes\
 
 1. In the **Configuration profile ID** field, enter the name of the AWS AppConfig configuration profile for your feature flag\.
 
-1. In the **Access key ID** and **Secret key** fields, enter the credentials you copied in [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#appconfig-integration-jira-permissions-user)\. Optionally, you can also specify a session token\.
+1. In the **Access key ID** and **Secret key** fields, enter the credentials you copied in [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)\. Optionally, you can also specify a session token\.
 
 1. Choose **Submit**\.
 
 1. In the Atlassian console, choose **Projects**, and then choose the project you selected for AWS AppConfig integration\. The **Issues** page displays an issue for each feature flag in the specified AWS account and AWS Region\.
 
-## Deleting the AWS AppConfig for Jira application and data<a name="appconfig-integration-jira-delete"></a>
+## Deleting the AWS AppConfig for Jira application and data<a name="working-with-appconfig-extensions-about-jira-delete"></a>
 
 If you no longer want to use Jira integration with AWS AppConfig feature flags, you can delete the AWS AppConfig for Jira application in the Atlassian console\. Deleting the integration application does the following:
 + Deletes the association between your Jira instance and AWS AppConfig\.

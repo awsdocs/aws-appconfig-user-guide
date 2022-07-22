@@ -39,9 +39,7 @@ The following procedure describes how to use the AWS CLI \(on Linux or Windows\)
 
 **To create an environment step by step**
 
-1. Install and configure the AWS CLI or the AWS Tools for PowerShell, if you have not already\.
-
-   For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
 
 1. Run the following command to create an environment\. 
 

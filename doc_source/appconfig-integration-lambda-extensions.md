@@ -5,7 +5,7 @@ An AWS Lambda extension is a companion process that augments the capabilities of
 If you use AWS AppConfig feature flags or other dynamic configuration data in a Lambda function, then we recommend that you add the AWS AppConfig Lambda extension as a layer to your Lambda function\. This makes calling feature flags simpler, and the extension itself includes best practices that simplify using AWS AppConfig while reducing costs\. Reduced costs result from fewer API calls to the AWS AppConfig service and shorter Lambda function processing times\. For more information about Lambda extensions, see [Lambda extensions](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html) in the *AWS Lambda Developer Guide*\.
 
 **Note**  
-AWS AppConfig [pricing](https://aws.amazon.com/systems-manager/pricing/) is based on the number of times a configuration is called and received\. You costs increase if your Lambda performs multiple cold starts and retrieves new configuration data frequently\. 
+AWS AppConfig [pricing](https://aws.amazon.com/systems-manager/pricing/) is based on the number of times a configuration is called and received\. Your costs increase if your Lambda performs multiple cold starts and retrieves new configuration data frequently\. 
 
 This topic includes information about the AWS AppConfig Lambda extension and the procedure for how to configure the extension to work with your Lambda function\. 
 

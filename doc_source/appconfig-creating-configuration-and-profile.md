@@ -493,9 +493,7 @@ The following procedure describes how to use the AWS Command Line Interface \(on
 
 **To create a feature flags configuration step by step**
 
-1. Install and configure the AWS CLI or the AWS Tools for PowerShell, if you have not already\.
-
-   For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
 
 1. Create a feature flag configuration profile specifying its **Type** as `AWS.AppConfig.FeatureFlags`\. The configuration profile must use `hosted` for the location URI\.
 
@@ -1064,9 +1062,7 @@ The following procedure describes how to use the AWS CLI \(on Linux or Windows\)
 
 **To create a configuration profile step by step**
 
-1. Install and configure the AWS CLI or the AWS Tools for PowerShell, if you have not already\.
-
-   For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
 
 1. Run the following command to create a freeform configuration profile\. 
 

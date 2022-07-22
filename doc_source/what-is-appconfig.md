@@ -45,18 +45,14 @@ AWS AppConfig offers the following benefits for your organization:
 
 ## **Get started with AWS AppConfig**<a name="how-to-get-started-appconfig"></a>
 
-The following resources can help you work directly with AWS AppConfig\.
-
-View more AWS videos on the [Amazon Web Services YouTube Channel](https://www.youtube.com/user/AmazonWebServices)\.
-
 The following blogs can help you learn more about AWS AppConfig and its capabilities:
 + **[Introduction to AWS AppConfig deployment](http://aws.amazon.com/blogs/aws/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)** – Learn about safe deployment of application configuration settings with AWS AppConfig\.
 + **[Automating feature release using AWS AppConfig deployment](http://aws.amazon.com/blogs/mt/automating-feature-release-using-aws-appconfig-integration-with-aws-codepipeline/)** – Learn how to automate feature release using AWS AppConfig integration with AWS CodePipeline\.
-+ **[Deploying application configuration to serverless workloads](http://aws.amazon.com/blogs/aws/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)** – Learn how to use an AWS AppConfig Lambda extension to deploy application configuration to serverless workloads\. 
++ **[Deploying application configuration to serverless workloads](http://aws.amazon.com/blogs/mt/introducing-aws-appconfig-lambda-extension-deploying-application-configuration-serverless/)** – Learn how to use an AWS AppConfig Lambda extension to deploy application configuration to serverless workloads\. 
 
 ## How AWS AppConfig works<a name="learn-more-appconfig-how-it-works"></a>
 
- At a high level, there are three processes for working with AWS AppConfig:
+At a high level, there are three processes for working with AWS AppConfig:
 
 1. [Configure](#learn-more-appconfig-how-it-works-details-1) AWS AppConfig to work with your application\.
 

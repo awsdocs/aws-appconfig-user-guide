@@ -4,5 +4,5 @@ AWS AppConfig integrates with other AWS services to help you manage your applica
 
 **Topics**
 + [AWS AppConfig integration with Lambda extensions](appconfig-integration-lambda-extensions.md)
-+ [AWS AppConfig integration with Atlassian Jira](appconfig-integration-jira.md)
++ [AWS AppConfig integration with Jira](appconfig-integration-ref-jira.md)
 + [AWS AppConfig integration with CodePipeline](appconfig-integration-codepipeline.md)
