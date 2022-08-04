@@ -2,6 +2,9 @@
 
 This topic lists AWS AppConfig Lambda extension versions according to processor\. The AWS AppConfig Lambda extension supports Lambda functions developed for the x86\-64 and ARM64 \(Graviton2\) platforms\. Each table includes the Amazon Resource Name \(ARN\) to use in each AWS Region\.
 
+**Note**  
+AWS AppConfig supports all of the versions listed below and listed in [Older extension versions](#appconfig-integration-lambda-extensions-enabling-older-versions)\. We recommend that you periodically update to the latest version to take advantage of extension enhancements\.
+
 **Topics**
 + [x86\-64 platform](#appconfig-integration-lambda-extensions-enabling-x86-64)
 + [ARM64 platform](#appconfig-integration-lambda-extensions-enabling-ARM64)

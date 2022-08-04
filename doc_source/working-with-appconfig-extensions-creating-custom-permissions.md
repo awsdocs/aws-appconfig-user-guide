@@ -31,7 +31,7 @@ Use the following procedure to create and configure an AWS Identity and Access M
 
 1. On the **Add permissions** page, choose **Create policy**\. The **Create policy** page opens in a new tab\.
 
-1. Choose the **JSON** tab and then paste the following permission policy into the editor\. The `lambda:InvokeFunction` action is used for `PRE_*` action points\. The `lambda:InvokeAsync` action is used for `ON_*` action points\. Replace *Your Lambda ARN* with the ARN of your Lambda\.
+1. Choose the **JSON** tab, and then paste the following permission policy into the editor\. The `lambda:InvokeFunction` action is used for `PRE_*` action points\. The `lambda:InvokeAsync` action is used for `ON_*` action points\. Replace *Your Lambda ARN* with the Amazon Resource Name \(ARN\) of your Lambda\.
 
    ```
    {
@@ -58,7 +58,7 @@ Use the following procedure to create and configure an AWS Identity and Access M
 
 1. On the browser tab for your custom trust policy, choose the Refresh icon and then search for the permission policy you just created\.
 
-1. Select the checkbox for your permission policy and then choose **Next**\.
+1. Select the check box for your permission policy and then choose **Next**\.
 
 1. On the **Name, review, and create** page, enter a name in the **Role name** box, and then enter a description\.
 

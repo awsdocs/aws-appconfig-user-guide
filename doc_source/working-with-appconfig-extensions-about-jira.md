@@ -1,13 +1,13 @@
 # Working with the Atlassian Jira extension for AWS AppConfig<a name="working-with-appconfig-extensions-about-jira"></a>
 
-Integrating with Atlassian Jira allows AWS AppConfig to create and update issues in the Atlassian console whenever you make changes to a [feature flag](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html#appconfig-creating-configuration-and-profile-feature-flags) in your AWS account for the specified AWS Region\. Each Jira issue includes the flag name, application ID, configuration profile ID, and flag values\. After you update, save, and deploy your flag changes, Jira updates the existing issues with the details of the change\.
+By integrating with Atlassian Jira, AWS AppConfig can create and update issues in the Atlassian console whenever you make changes to a [feature flag](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html#appconfig-creating-configuration-and-profile-feature-flags) in your AWS account for the specified AWS Region\. Each Jira issue includes the flag name, application ID, configuration profile ID, and flag values\. After you update, save, and deploy your flag changes, Jira updates the existing issues with the details of the change\.
 
 **Note**  
 Jira updates issues whenever you create or update a feature flag\. Jira also updates issues when you delete a child\-level flag attribute from a parent\-level flag\. Jira does not record information when you delete a parent\-level flag\.
 
 To configure integration, you must do the following:
-+ [Configure permissions](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions-about-jira-permissions.html)
-+ [Configure integration](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions-about-jira-configure.html)
++ [Configuring permissions for AWS AppConfig Jira integration](#working-with-appconfig-extensions-about-jira-permissions)
++ [Configuring the AWS AppConfig Jira integration application](#working-with-appconfig-extensions-about-jira-configure)
 
 ## Configuring permissions for AWS AppConfig Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions"></a>
 
@@ -46,10 +46,9 @@ Use the following procedure to create an IAM permissions policy that allows Atla
            {
                "Effect": "Allow",
                "Action": [
-                          "appconfig:AssociateExtension",
-                          "appconfig:GetConfigurationProfile",
-                          "appconfig:UpdateConfigurationProfile"
-                          
+                          "appconfig:CreateExtensionAssociation",
+                          "appconfig:ListExtensionAssociations",
+                          "appconfig:GetConfigurationProfile"                       
                 ],
                "Resource": [
                           "arn:aws:appconfig:Region:account_ID:application/application_ID",
@@ -152,8 +151,8 @@ An AWS AppConfig feature flag can include multiple child\-level flag attributes\
 ## Deleting the AWS AppConfig for Jira application and data<a name="working-with-appconfig-extensions-about-jira-delete"></a>
 
 If you no longer want to use Jira integration with AWS AppConfig feature flags, you can delete the AWS AppConfig for Jira application in the Atlassian console\. Deleting the integration application does the following:
-+ Deletes the association between your Jira instance and AWS AppConfig\.
-+ Deletes your Jira instance details from AWS AppConfig\.
++ Deletes the association between your Jira instance and AWS AppConfig
++ Deletes your Jira instance details from AWS AppConfig
 
 **To delete the AWS AppConfig for Jira application**
 

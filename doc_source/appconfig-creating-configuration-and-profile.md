@@ -54,7 +54,7 @@ default_payments_per_region:
 
 **Operational configuration**
 
-The following operational configuration enforces limits on how an application processes requests\.
+The following freeform configuration enforces limits on how an application processes requests\.
 
 ------
 #### [ JSON ]
@@ -96,7 +96,7 @@ throttle-limits:
 
 **Access control list configuration**
 
-The following access control list configuration specifies which users or groups can access an application\.
+The following access control list freeform configuration specifies which users or groups can access an application\.
 
 ------
 #### [ JSON ]
@@ -179,7 +179,7 @@ You can create the IAM role that provides access to the configuration data by us
                 "ssm:GetParameter"
             ],
             "Resource": [
-                "Arn:aws:ssm:AWS-Region:account-number:parameter/parameter-name"
+                "arn:aws:ssm:AWS-Region:account-number:parameter/parameter-name"
             ]
         }
     ]

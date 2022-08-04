@@ -5,11 +5,11 @@ An extension augments your ability to inject logic or behavior at different poin
 + Scrub the contents of a configuration profile for sensitive data before a deployment starts\.
 + Create or update an Atlassian Jira issue whenever a change is made to a feature flag\.
 + Merge content from a service or data source into your configuration data when you start a deployment\.
-+ Backup a configuration to an Amazon Simple Storage Service \(Amazon S3\) bucket whenever a configuration is deployed\. 
++ Back up a configuration to an Amazon Simple Storage Service \(Amazon S3\) bucket whenever a configuration is deployed\. 
 
 You can associate these types of tasks with AWS AppConfig applications, environments, and configuration profiles\.
 
 **Topics**
 + [About AWS AppConfig extensions](working-with-appconfig-extensions-about.md)
-+ [Working with AWS\-authored extensions](working-with-appconfig-extensions-about-predefined.md)
-+ [Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)
++ [Working with AWS authored extensions](working-with-appconfig-extensions-about-predefined.md)
++ [Walkthrough: Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)

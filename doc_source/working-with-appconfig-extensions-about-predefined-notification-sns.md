@@ -1,8 +1,8 @@
 # Working with the `AWS AppConfig deployment events to Amazon SNS` extension<a name="working-with-appconfig-extensions-about-predefined-notification-sns"></a>
 
-The `AWS AppConfig deployment events to Amazon SNS` extension is an AWS\-authored extension that helps you monitor and act on the AWS AppConfig configuration deployment workflow\. The extension publishes messages to an Amazon SNS topic whenever a configuration is deployed\. After you’ve associated the extension to one of your AWS AppConfig applications, environments, or configuration profiles, AWS AppConfig publishes a message to the topic after every configuration deployment start, end, and rollback\.
+The `AWS AppConfig deployment events to Amazon SNS` extension is an AWS authored extension that helps you monitor and act on the AWS AppConfig configuration deployment workflow\. The extension publishes messages to an Amazon SNS topic whenever a configuration is deployed\. After you associate the extension to one of your AWS AppConfig applications, environments, or configuration profiles, AWS AppConfig publishes a message to the topic after every configuration deployment start, end, and rollback\.
 
-If you want more control over which action points send Amazon SNS notifications, you can create a custom extension and enter an Amazon SNS topic Amazon Resource Name \(ARN\) for the URI field\. For information about creating an extension, see [Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)\.
+If you want more control over which action points send Amazon SNS notifications, you can create a custom extension and enter an Amazon SNS topic Amazon Resource Name \(ARN\) for the URI field\. For information about creating an extension, see [Walkthrough: Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)\.
 
 ## Using the extension<a name="working-with-appconfig-extensions-about-predefined-notification-sns-using"></a>
 
@@ -39,11 +39,11 @@ Attach the extension to one of your AWS AppConfig resources by creating an exten
 After you create the association, when a configuration for the specified AWS AppConfig resource is deployed, AWS AppConfig invokes the extension and sends notifications according to the action points specified in the extension\.
 
 **Note**  
-This extension is invoked by the following action points\.  
+This extension is invoked by the following action points:  
 `ON_DEPLOYMENT_START`
 `ON_DEPLOYMENT_COMPLETE`
 `ON_DEPLOYMENT_ROLLED_BACK`
-You can't customize the actions points for this extension\. To invoke different action points, you can create your own extension\. For more information, see [Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)\.
+You can't customize the actions points for this extension\. To invoke different action points, you can create your own extension\. For more information, see [Walkthrough: Creating custom AWS AppConfig extensions](working-with-appconfig-extensions-creating-custom.md)\.
 
 Use the following procedures to create an AWS AppConfig extension association by using either the AWS Systems Manager console or the AWS CLI\.
 
@@ -51,7 +51,7 @@ Use the following procedures to create an AWS AppConfig extension association by
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/appconfig/](https://console.aws.amazon.com/systems-manager/appconfig/)\.
 
-1. In the navigation pane choose **AWS AppConfig**\.
+1. In the navigation pane, choose **AWS AppConfig**\.
 
 1. On the **Extensions** tab, choose **Add to resource**\.
 

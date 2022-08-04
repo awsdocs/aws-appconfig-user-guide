@@ -59,4 +59,4 @@ def write_backup_to_s3(bucket_name, config_data_bytes):
     new_object.put(Body=config_data_bytes)
 ```
 
-If you want to use this sample during this walkthrough, save it with the name **MyS3ConfigurationBackUpExtension** and copy the Amazon Resource Name \(ARN\) for the function\. You specify the ARN when you create the IAM assume role\. You specify the ARN and the name when you create the extension\.
+If you want to use this sample during this walkthrough, save it with the name **MyS3ConfigurationBackUpExtension** and copy the Amazon Resource Name \(ARN\) for the function\. You specify the ARN when you create the AWS Identity and Access Management \(IAM\) assume role in the next section\. You specify the ARN and the name when you create the extension\.

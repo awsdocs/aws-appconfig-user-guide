@@ -1,6 +1,6 @@
-# Working with AWS\-authored extensions<a name="working-with-appconfig-extensions-about-predefined"></a>
+# Working with AWS authored extensions<a name="working-with-appconfig-extensions-about-predefined"></a>
 
-AWS AppConfig includes the following AWS\-authored extensions\. These extensions can help you integrate the AWS AppConfig workflow with other services\. You can use these extensions in the AWS Management Console\.
+AWS AppConfig includes the following AWS authored extensions\. These extensions can help you integrate the AWS AppConfig workflow with other services\. You can use these extensions in the AWS Management Console\.
 
 
 ****  
