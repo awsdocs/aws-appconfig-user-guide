@@ -38,7 +38,7 @@ Before you enable the AWS AppConfig Lambda extension, do the following:
 + Configure AWS AppConfig to manage your configuration updates\. For more information, see [Working with AWS AppConfig](appconfig-working.md)\.
 + Add `appconfig:StartConfigurationSession` and `appconfig:GetLatestConfiguration` to the AWS Identity and Access Management \(IAM\) policy used by the Lambda function execution role\. For more information, see [AWS Lambda execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) in the *AWS Lambda Developer Guide*\. For more information about AWS AppConfig permissions, see [Actions, resources, and condition keys for AWS AppConfig](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsappconfig.html) in the *Service Authorization Reference*\. 
 
-## Supported runtimes<a name="appconfig-integratio-lambda-extensions-runtimes"></a>
+## Supported runtimes<a name="appconfig-integration-lambda-extensions-runtimes"></a>
 
 The AWS AppConfig Lambda extension supports the following runtimes:
 + Python 3\.7, 3\.8, 3\.9
@@ -106,12 +106,14 @@ AWS Lambda logs information about the AWS AppConfig Lambda extension and the Lam
 
 | Environment variable | Details | Default value | 
 | --- | --- | --- | 
+|  `AWS_APPCONFIG_EXTENSION_HTTP_PORT`  |  This environment variable specifies the port on which the local HTTP server that hosts the extension runs\.  | 2772 | 
+|  `AWS_APPCONFIG_EXTENSION_LOG_LEVEL`  |  This environment variable specifies which AWS AppConfig extension\-specific logs are sent to Amazon CloudWatch Logs for a function\. Valid, case\-insensitive values are: `debug`, `info`, `warn`, `error`, and `none`\. Debug includes detailed information, including timing information, about the extension\.  |  `info`  | 
+|  `AWS_APPCONFIG_EXTENSION_MAX_CONNECTIONS`  |  This environment variable configures the maximum number of connections the extension uses to retrieve configurations from AWS AppConfig\.   | 3 | 
 |  `AWS_APPCONFIG_EXTENSION_POLL_INTERVAL_SECONDS`  |  This environment variable controls how often the extension polls AWS AppConfig for an updated configuration in seconds\.  | 45 | 
 |  `AWS_APPCONFIG_EXTENSION_POLL_TIMEOUT_MILLIS`  |  This environment variable controls the maximum amount of time, in milliseconds, the extension waits for a response from AWS AppConfig when refreshing data in the cache\. If AWS AppConfig does not respond in the specified amount of time, the extension skips this poll interval and returns the previously updated cached data\.  | 3000 | 
-|  `AWS_APPCONFIG_EXTENSION_HTTP_PORT`  |  This environment variable specifies the port on which the local HTTP server that hosts the extension runs\.  | 2772 | 
 |  `AWS_APPCONFIG_EXTENSION_PREFETCH_LIST`  |  This environment variable specifies the configuration data that the extension starts to retrieve before the function initializes and the handler runs\. It can reduce the function's cold start time significantly\.  | None | 
-|  `AWS_APPCONFIG_EXTENSION_MAX_CONNECTIONS`  |  This environment variable configures the maximum number of connections the extension uses to retrieve configurations from AWS AppConfig\.   | 3 | 
-|  `AWS_APPCONFIG_EXTENSION_LOG_LEVEL`  |  This environment variable specifies which AWS AppConfig extension\-specific logs are sent to Amazon CloudWatch Logs for a function\. Valid, case\-insensitive values are: `debug`, `info`, `warn`, `error`, and `none`\. Debug includes detailed information, including timing information, about the extension\.  |  `info`  | 
+| AWS\_APPCONFIG\_EXTENSION\_PROXY\_HEADERS | This environment variable specifies headers required by the proxy referenced in the AWS\_APPCONFIG\_EXTENSION\_PROXY\_URL environment variable\. The value is a comma\-separated list of headers\. Each header uses the following form: <pre>"header: value"</pre> | None | 
+| AWS\_APPCONFIG\_EXTENSION\_PROXY\_URL | This environment variable specifies the proxy URL to use for connections from the AWS AppConfig extension to AWS services\. HTTPS and HTTP URLs are supported\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_ARN | This environment variable specifies the IAM role ARN corresponding to a role that should be assumed by the AWS AppConfig extension to retrieve configuration\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_EXTERNAL\_ID | This environment variable specifies the external id to use in conjunction with the assumed role ARN\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_SESSION\_NAME | This environment variable specifies the session name to be associated with the credentials for the assumed IAM role\. | None | 

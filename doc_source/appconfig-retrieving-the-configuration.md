@@ -20,6 +20,7 @@ When calling `GetLatestConfiguration`, your client code sends the most recent `C
 Note the following important information\.  
 The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
 The `InitialConfigurationToken` and `NextPollConfigurationToken` expire after 24 hours\. If a `GetLatestConfiguration` call uses an expired token, the system returns `BadRequestException`\.
+The API action previously used to retrieve configuration data, `GetConfiguration`, is deprecated\. 
 
 ## Retrieving a configuration example<a name="appconfig-retrieving-the-configuration-example"></a>
 

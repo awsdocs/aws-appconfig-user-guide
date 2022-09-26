@@ -12,10 +12,10 @@ To configure permissions for your custom extension, you can do one of the follow
 This walkthrough describes how to create the IAM service role\.
 
 **3\. Create an extension**  
-You can create an extension by using the AWS AppConfig console\.
+You can create an extension by using the AWS AppConfig console or by calling the [CreateExtension](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtension.html) API action from the AWS CLI, AWS Tools for PowerShell, or the SDK\. The walkthrough uses the console\.
 
 **4\. Create an extension association**  
-You can create an extension association by using the AWS AppConfig console\.
+You can create an extension association by using the AWS AppConfig console or by calling the [CreateExtensionAssociation](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtensionAssociation.html) API action from the AWS CLI, AWS Tools for PowerShell, or the SDK\. The walkthrough uses the console\.
 
 **5\. Perform an action that invokes the extension**  
 After you create the association, AWS AppConfig invokes the extension when the action points defined by the extension occur for that resource\. For example, if you associate an extension that contains a `PRE_CREATE_HOSTED_CONFIGURATION_VERSION` action, the extension is invoked every time you create a new hosted configuration version\.

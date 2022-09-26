@@ -9,29 +9,7 @@ If you want more control over which action points send Amazon SQS notifications,
 This section describes how to use the `AWS AppConfig deployment events to Amazon SQS` extension\.
 
 **Step 1: Configure AWS AppConfig to enqueue messages**  
-Add an Amazon SQS policy to your Amazon SQS queue granting AWS AppConfig `sqs:SendMessage` permissions\. For more information, see [Basic examples of Amazon SQS policies](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html)\.
-
-Here's an example Amazon SQS policy that grants AWS AppConfig `sqs:SendMessage` permissions\.
-
-```
-{
-  "Version": "2012-10-17",
-  "Id": "SQS_Queue_Policy_UUID",
-  "Statement": [
-    {
-      "Sid": "Queue1_SendMessage",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": [
-          "appconfig.amazonaws.com"
-        ]
-      },
-      "Action": "sqs:SendMessage",
-      "Resource": "your Amazon SQS queue ARN"
-    }
-  ]
-}
-```
+Add an Amazon SQS policy to your Amazon SQS queue granting AWS AppConfig \(`appconfig.amazonaws.com`\) send message permissions \(`sqs:SendMessage`\)\. For more information, see [Basic examples of Amazon SQS policies](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html)\.
 
 **Step 2: Create an extension association**  
 Attach the extension to one of your AWS AppConfig resources by creating an extension association\. You create the association by using the AWS AppConfig console or the [CreateExtensionAssociation](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtensionAssociation.html) API action\. When you create the association, you specify the ARN of an AWS AppConfig application, environment, or configuration profile\. If you associate the extension to an application or an environment, a notification is sent for any configuration profile contained within the specified application or environment\. When you create the association, you must enter a `Here` parameter that contains the ARN of the Amazon SQS queue you want to use\.

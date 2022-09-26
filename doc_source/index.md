@@ -4,17 +4,18 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
 + [What Is AWS AppConfig?](what-is-appconfig.md)
++ [About the AWS AppConfig data plane service](about-data-plane.md)
 + [Getting Started with AWS AppConfig](getting-started-with-appconfig.md)
    + [Install or upgrade AWS command line tools](getting-started-cli.md)
    + [Configuring permissions for AWS AppConfig](getting-started-with-appconfig-permissions.md)
@@ -29,6 +30,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Working with AWS AppConfig extensions](working-with-appconfig-extensions.md)
    + [About AWS AppConfig extensions](working-with-appconfig-extensions-about.md)
    + [Working with AWS authored extensions](working-with-appconfig-extensions-about-predefined.md)
+      + [Working with the Amazon CloudWatch Evidently extension](working-with-appconfig-extensions-about-predefined-evidently.md)
       + [Working with the AWS AppConfig deployment events to Amazon EventBridge extension](working-with-appconfig-extensions-about-predefined-notification-eventbridge.md)
       + [Working with the AWS AppConfig deployment events to Amazon SNS extension](working-with-appconfig-extensions-about-predefined-notification-sns.md)
       + [Working with the AWS AppConfig deployment events to Amazon SQS extension](working-with-appconfig-extensions-about-predefined-notification-sqs.md)

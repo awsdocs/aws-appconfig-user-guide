@@ -9,29 +9,7 @@ If you want more control over which action points send Amazon SNS notifications,
 This section describes how to use the `AWS AppConfig deployment events to Amazon SNS` extension\.
 
 **Step 1: Configure AWS AppConfig to publish messages to a topic**  
-Add an access control policy to your Amazon SNS topic granting AWS AppConfig `sns:Publish` permissions\. For more information, see [Example cases for Amazon SNS access control](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html.html)\.
-
-Here's an example Amazon SNS policy that grants AWS AppConfig `sns:Publish` permissions\.
-
-```
-{
-  "Statement": [
-    {
-      "Sid": "grant-appconfig-publish",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": [
-          "appconfig.amazonaws.com"
-        ]
-      },
-      "Action": [
-        "sns:Publish"
-      ],
-      "Resource": "your Amazon SNS topic ARN"
-    }
-  ]
-}
-```
+Add an access control policy to your Amazon SNS topic granting AWS AppConfig \(`appconfig.amazonaws.com`\) publish permissions \(`sns:Publish`\)\. For more information, see [Example cases for Amazon SNS access control](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html)\.
 
 **Step 2: Create an extension association**  
 Attach the extension to one of your AWS AppConfig resources by creating an extension association\. You create the association by using the AWS AppConfig console or the [CreateExtensionAssociation](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateExtensionAssociation.html) API action\. When you create the association, you specify the ARN of an AWS AppConfig application, environment, or configuration profile\. If you associate the extension to an application or an environment, a notification is sent for any configuration profile contained within the specified application or environment\. When you create the association, you must enter a value for the `topicArn` parameter that contains the ARN of the Amazon SNS topic you want to use\.

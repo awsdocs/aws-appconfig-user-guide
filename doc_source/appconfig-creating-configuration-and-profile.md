@@ -444,7 +444,7 @@ AWS AppConfig calls your validation Lambda when calling the `StartDeployment` an
 You can use feature flags to enable or disable features within your applications or to configure different characteristics of your application features using flag attributes\. AWS AppConfig stores feature flag configurations in the AWS AppConfig hosted configuration store in a feature flag format that contains data and metadata about your flags and the flag attributes\. For more information about the AWS AppConfig hosted configuration store, see [About the AWS AppConfig hosted configuration store](#appconfig-creating-configuration-and-profile-about-hosted-store) section\.
 
 **Important**  
-To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
+To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`, which is deprecated\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
 
 **Topics**
 + [Creating a feature flag and a feature flag configuration profile \(console\)](#appconfig-creating-feature-flag-configuration-create-console)
@@ -878,7 +878,7 @@ Use the `AWS.AppConfig.FeatureFlags` JSON schema as a reference to create your f
 ```
 
 **Important**  
-To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
+To retrieve feature flag configuration data, your application must call the `GetLatestConfiguration` API\. You can't retrieve feature flag configuration data by calling `GetConfiguration`, which is deprecated\. For more information, see [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) in the *AWS AppConfig API Reference*\.
 
 When your application calls [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_GetLatestConfiguration.html) and receives a newly deployed configuration, the information that defines your feature flags and attributes is removed\. The simplified JSON contains a map of keys that match each of the flag keys you specified\. The simplified JSON also contains mapped values of `true` or `false` for the `enabled` attribute\. If a flag sets `enabled` to `true`, any attributes of the flag will be present as well\. The following JSON schema describes the format of the JSON output\.
 
