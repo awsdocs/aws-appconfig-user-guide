@@ -98,7 +98,6 @@ The following procedure describes how to use the AWS CLI \(on Linux or Windows\)
      --final-bake-time-in-minutes Amount_of_time_AWS AppConfig_monitors_for_alarms_before_considering_the_deployment_to_be_complete ^
      --growth-factor The_percentage_of_targets_to_receive_a_deployed_configuration_during_each_interval ^
      --growth-type The_linear_or_exponential_algorithm_used_to_define_how_percentage_grows_over_time ^
-     --name A_name_for_the_deployment_strategy ^
      --replicate-to To_save_the_deployment_strategy_to_a_Systems_Manager_(SSM)_document ^
      --tags User_defined_key_value_pair_metadata_of_the_deployment_strategy
    ```
