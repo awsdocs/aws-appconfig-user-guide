@@ -1,6 +1,6 @@
 # Step 6: Retrieving the configuration<a name="appconfig-retrieving-the-configuration"></a>
 
-Your application retrieves configuration data by first establishing a configuration session using the [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API action\. Your session's client then makes periodic calls to [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) to check for and retrieve the latest data available\.
+Your application retrieves configuration data by first establishing a configuration session using the [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API operation\. Your session's client then makes periodic calls to [GetLatestConfiguration](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html) to check for and retrieve the latest data available\.
 
 When calling `StartConfigurationSession`, your code sends the following information:
 + Identifiers \(ID or name\) of an AWS AppConfig application, environment, and configuration profile that the session tracks\.
@@ -9,7 +9,7 @@ When calling `StartConfigurationSession`, your code sends the following informat
 In response, AWS AppConfig provides an `InitialConfigurationToken` to be given to the session's client and used the first time it calls `GetLatestConfiguration` for that session\.
 
 **Important**  
-This token should only be used once in your first call to `GetLatestConfiguration`\. You *must* use the new token in the `GetLatestConfiguration` response \(`NextPollConfigurationToken`\) in each subsequent call to `GetLatestConfiguration`\.
+This token should only be used once in your first call to `GetLatestConfiguration`\. You *must* use the new token in the `GetLatestConfiguration` response \(`NextPollConfigurationToken`\) in each subsequent call to `GetLatestConfiguration`\. To support long poll use cases, the tokens are valid for up to 24 hours\. If a `GetLatestConfiguration` call uses an expired token, the system returns `BadRequestException`\.
 
 When calling `GetLatestConfiguration`, your client code sends the most recent `ConfigurationToken` value it has and receives in response:
 + `NextPollConfigurationToken`: the `ConfigurationToken` value to use on the next call to `GetLatestConfiguration`\.
@@ -19,12 +19,12 @@ When calling `GetLatestConfiguration`, your client code sends the most recent `C
 **Important**  
 Note the following important information\.  
 The [StartConfigurationSession](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html) API should only be called once per application, environment, configuration profile, and client to establish a session with the service\. This is typically done in the startup of your application or immediately prior to the first retrieval of a configuration\.
-The `InitialConfigurationToken` and `NextPollConfigurationToken` expire after 24 hours\. If a `GetLatestConfiguration` call uses an expired token, the system returns `BadRequestException`\.
-The API action previously used to retrieve configuration data, `GetConfiguration`, is deprecated\. 
+If your configuration is deployed using a `KmsKeyIdentifier`, your request to receive the configuration must include permission to call `kms:Decrypt`\. For more information, see [Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html) in the *AWS Key Management Service API Reference*\.
+The API operation previously used to retrieve configuration data, `GetConfiguration`, is deprecated\. The `GetConfiguration` API operation does not support encrypted configurations\.
 
 ## Retrieving a configuration example<a name="appconfig-retrieving-the-configuration-example"></a>
 
-The following AWS CLI example demonstrates how to retrieve configuration data by using the AWS AppConfig Data `StartConfigurationSession` and `GetLatestConfiguration` API actions\. The first command starts a configuration session\. This call includes the IDs \(or names\) of the AWS AppConfig application, the environment, and the configuration profile\. The API returns an `InitialConfigurationToken` used to fetch your configuration data\.
+The following AWS CLI example demonstrates how to retrieve configuration data by using the AWS AppConfig Data `StartConfigurationSession` and `GetLatestConfiguration` API operations\. The first command starts a configuration session\. This call includes the IDs \(or names\) of the AWS AppConfig application, the environment, and the configuration profile\. The API returns an `InitialConfigurationToken` used to fetch your configuration data\.
 
 ```
 aws appconfigdata start-configuration-session \
@@ -66,7 +66,7 @@ aws appconfigdata get-latest-configuration \
 ```
 
 **Important**  
-Note the following important details about the `GetLatestConfiguration` API action:  
+Note the following important details about the `GetLatestConfiguration` API operation:  
 The `GetLatestConfiguration` response includes a `Configuration` section that shows the configuration data\. The `Configuration` section only appears if the system finds new or updated configuration data\. If the system doesn't find new or updated configuration data, then the `Configuration` data is empty\. 
 You receive a new `ConfigurationToken` in every response from `GetLatestConfiguration`\.
 We recommend tuning the polling frequency of your `GetLatestConfiguration` API calls based on your budget, the expected frequency of your configuration deployments, and the number of targets for a configuration\.

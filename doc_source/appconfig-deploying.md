@@ -1,6 +1,12 @@
 # Step 5: Deploying a configuration<a name="appconfig-deploying"></a>
 
-Starting a deployment in AWS AppConfig calls the [StartDeployment](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartDeployment.html) API action\. This call includes the IDs of the AWS AppConfig application, the environment, the configuration profile, and \(optionally\) the configuration data version to deploy\. The call also includes the ID of the deployment strategy to use, which determines how the configuration data is deployed\.
+Starting a deployment in AWS AppConfig calls the [StartDeployment](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_StartDeployment.html) API operation\. This call includes the IDs of the AWS AppConfig application, the environment, the configuration profile, and \(optionally\) the configuration data version to deploy\. The call also includes the ID of the deployment strategy to use, which determines how the configuration data is deployed\.
+
+If you deploy secrets stored in AWS Secrets Manager, Amazon Simple Storage Service \(Amazon S3\) objects encrypted with a customer managed key, or secure string parameters stored in AWS Systems Manager Parameter Store encrypted with a customer managed key, you must specify a value for the `KmsKeyIdentifier` parameter\. If your configuration is not encrypted or is encrypted with an AWS managed key, specifying a value for the `KmsKeyIdentifier` parameter is not required\.
+
+**Note**  
+The value you specify for `KmsKeyIdentifier` must be a customer managed key\. This doesn't have to be the same key you used to encrypt your configuration\.  
+When you start a deployment with a `KmsKeyIdentifier`, the permission poilcy attached to your AWS Identity and Access Management \(IAM\) principal must allow the `kms:GenerateDataKey` operation\.
 
 AWS AppConfig monitors the distribution to all hosts and reports status\. If a distribution fails, then AWS AppConfig rolls back the configuration\.
 
@@ -37,11 +43,11 @@ Use the following procedure to deploy an AWS AppConfig configuration by using th
 
 ## Deploy a configuration \(commandline\)<a name="appconfig-deploying-commandline"></a>
 
-The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to deploy a AWS AppConfig configuration\.
+The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to deploy an AWS AppConfig configuration\.
 
 **To deploy a configuration step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Run the following command to deploy a configuration\. 
 

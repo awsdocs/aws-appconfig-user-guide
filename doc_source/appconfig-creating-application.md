@@ -13,8 +13,6 @@ Use the following procedure to create an AWS AppConfig application by using the 
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/appconfig/](https://console.aws.amazon.com/systems-manager/appconfig/)\.
 
-1. In the navigation pane choose **AWS AppConfig**\.
-
 1. On the **Applications** tab, choose **Create application**\.
 
 1. For **Name**, enter a name for the application\.
@@ -27,13 +25,13 @@ Use the following procedure to create an AWS AppConfig application by using the 
 
 AWS AppConfig creates the application and then displays the **Environments** tab\. Proceed to [Step 2: Creating an environment ](appconfig-creating-environment.md)\. You can begin the procedure where it states, "On the **Environments** tab\.\.\."
 
-## Creating an AWS AppConfig application \(commandline\)<a name="appconfig-creating-application-commandline"></a>
+## Creating an AWS AppConfig application \(command line\)<a name="appconfig-creating-application-commandline"></a>
 
 The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create an AWS AppConfig application\.
 
 **To create an application step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Run the following command to create an application\. 
 

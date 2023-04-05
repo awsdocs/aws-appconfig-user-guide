@@ -10,7 +10,7 @@ An AWS AppConfig deployment strategy defines the following important aspects of 
 |  Deployment type  | Deployment type defines how the configuration deploys or *rolls out*\. AWS AppConfig supports **Linear** and **Exponential** deployment types\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-deployment-strategy.html)  | 
 |  Step percentage \(growth factor\)  |  This setting specifies the percentage of callers to target during each step of the deployment\.  In the SDK and the [AWS AppConfig API Reference](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateDeploymentStrategy.html), `step percentage` is called `growth factor`\.   | 
 |  Deployment time  |  This setting specifies an amount of time during which AWS AppConfig deploys to hosts\. This is not a timeout value\. It is a window of time during which the deployment is processed in intervals\. | 
-|  Bake time  |  This setting specifies the amount of time AWS AppConfig monitors for Amazon CloudWatch alarms after the configuration has been deployed to 100% of its targets, before considering the deployment to be complete\. If an alarm is triggered during this time, AWS AppConfig rolls back the deployment\. You must configure permissions for AWS AppConfig to roll back based on CloudWatch alarms\. For more information, see [\(Optional\) Configuring permissions for rollback based on CloudWatch alarms](getting-started-with-appconfig-cloudwatch-alarms-permissions.md)\.  | 
+|  Bake time  |  This setting specifies the amount of time AWS AppConfig monitors for Amazon CloudWatch alarms after the configuration has been deployed to 100% of its targets, before considering the deployment to be complete\. If an alarm is triggered during this time, AWS AppConfig rolls back the deployment\. You must configure permissions for AWS AppConfig to roll back based on CloudWatch alarms\. For more information, see [\(Optional\) Configure permissions for rollback based on CloudWatch alarms](setting-up-appconfig.md#getting-started-with-appconfig-cloudwatch-alarms-permissions)\.  | 
 
 ## Predefined deployment strategies<a name="appconfig-creating-deployment-strategy-predefined"></a>
 
@@ -31,7 +31,7 @@ You can create a maximum of 20 deployment strategies\. When you deploy a configu
 
 ### Creating an AWS AppConfig deployment strategy \(console\)<a name="appconfig-creating-deployment-strategy-create-console"></a>
 
-Use the following procedure to create a AWS AppConfig deployment strategy by using the AWS Systems Manager console\.
+Use the following procedure to create an AWS AppConfig deployment strategy by using the AWS Systems Manager console\.
 
 **To create a deployment strategy**
 
@@ -62,13 +62,13 @@ If you created a configuration profile for AWS CodePipeline, then you must creat
 
 Proceed to [Step 5: Deploying a configuration](appconfig-deploying.md)\.
 
-### Creating an AWS AppConfig deployment strategy \(commandline\)<a name="appconfig-creating-deployment-strategy-create-commandline"></a>
+### Creating an AWS AppConfig deployment strategy \(command line\)<a name="appconfig-creating-deployment-strategy-create-commandline"></a>
 
-The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create a AWS AppConfig deployment strategy\.
+The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create an AWS AppConfig deployment strategy\.
 
 **To create a deployment strategy step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Run the following command to create a deployment strategy\. 
 

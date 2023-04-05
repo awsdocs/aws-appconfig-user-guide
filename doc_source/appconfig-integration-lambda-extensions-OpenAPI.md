@@ -1,6 +1,6 @@
 # Integrating with OpenAPI<a name="appconfig-integration-lambda-extensions-OpenAPI"></a>
 
-You can use the following YAML specification for OpenAPI to create an SDK using a tool like [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\. You can update this specification to include hard\-coded values for Application, Environment, or Configuration\. You can also add additional paths \(if you have multiple configuration types\) and include configuration schemas to generate configuration\-specific typed models for your SDK clients\. For more information about OpenAPI \(which is also known as Swagger\), see the [OpenAPI specification](https://swagger.io/specification/)\.
+You can use the following YAML specification for OpenAPI to create an SDK using a tool like [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\. You can update this specification to include hardcoded values for Application, Environment, or Configuration\. You can also add additional paths \(if you have multiple configuration types\) and include configuration schemas to generate configuration\-specific typed models for your SDK clients\. For more information about OpenAPI \(which is also known as Swagger\), see the [OpenAPI specification](https://swagger.io/specification/)\.
 
 ```
 openapi: 3.0.0

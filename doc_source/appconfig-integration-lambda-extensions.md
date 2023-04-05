@@ -38,21 +38,12 @@ Before you enable the AWS AppConfig Lambda extension, do the following:
 + Configure AWS AppConfig to manage your configuration updates\. For more information, see [Working with AWS AppConfig](appconfig-working.md)\.
 + Add `appconfig:StartConfigurationSession` and `appconfig:GetLatestConfiguration` to the AWS Identity and Access Management \(IAM\) policy used by the Lambda function execution role\. For more information, see [AWS Lambda execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) in the *AWS Lambda Developer Guide*\. For more information about AWS AppConfig permissions, see [Actions, resources, and condition keys for AWS AppConfig](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsappconfig.html) in the *Service Authorization Reference*\. 
 
-## Supported runtimes<a name="appconfig-integration-lambda-extensions-runtimes"></a>
-
-The AWS AppConfig Lambda extension supports the following runtimes:
-+ Python 3\.7, 3\.8, 3\.9
-+ Node\.js 12\.x, 14\.x
-+ Ruby 2\.7
-+ Java 8, 11 \(Amazon Corretto\)
-+ \.NET Core 3\.1
-+ Custom runtimes \(Amazon Linux and Amazon Linux 2\)
-
-For more information about these runtimes, including the corresponding SDKs, operating systems, and architectures, see [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
-
 ## Adding the AWS AppConfig Lambda extension<a name="appconfig-integration-lambda-extensions-add"></a>
 
 To use the AWS AppConfig Lambda extension, you need to add the extension to your Lambda\. This can be done by adding the AWS AppConfig Lambda extension to your Lambda function as a layer or by enabling the extension on a Lambda function as a container image\.
+
+**Note**  
+The AWS AppConfig extension is runtime agnostic and supports all runtimes\.
 
 ### Adding the AWS AppConfig Lambda extension by using a layer and an ARN<a name="appconfig-integration-lambda-extensions-enabling"></a>
 
@@ -117,7 +108,7 @@ AWS Lambda logs information about the AWS AppConfig Lambda extension and the Lam
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_ARN | This environment variable specifies the IAM role ARN corresponding to a role that should be assumed by the AWS AppConfig extension to retrieve configuration\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_EXTERNAL\_ID | This environment variable specifies the external id to use in conjunction with the assumed role ARN\. | None | 
 | AWS\_APPCONFIG\_EXTENSION\_ROLE\_SESSION\_NAME | This environment variable specifies the session name to be associated with the credentials for the assumed IAM role\. | None | 
-| AWS\_APPCONFIG\_EXTENSION\_SERVICE\_REGION | This environment variable specifies an alternative region the extension should use to call the AWS AppConfig service\. When undefined, the extension uses the endpoint in the current region\. | None | 
+| AWS\_APPCONFIG\_EXTENSION\_SERVICE\_REGION | This environment variable specifies an alternative Region the extension should use to call the AWS AppConfig service\. When undefined, the extension uses the endpoint in the current Region\. | None | 
 
 ## Retrieving one or more flags from a feature flag configuration<a name="appconfig-integration-lambda-extensions-retrieving-flags"></a>
 
@@ -139,7 +130,7 @@ def lambda_handler(event, context):
     return config
 ```
 
-**To access a multiple flags and their attributes**
+**To access multiple flags and their attributes**
 
 ```
 import urllib.request

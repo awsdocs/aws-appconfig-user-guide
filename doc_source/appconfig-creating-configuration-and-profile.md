@@ -23,7 +23,7 @@ Use [AWS AppConfig](http://aws.amazon.com/systems-manager/features/appconfig/), 
 
 **Feature flag configuration**
 
-The following feature flag configuration enables or disables mobile payments and defaut payments on a per\-region basis\.
+The following feature flag configuration enables or disables mobile payments and default payments on a per\-region basis\.
 
 ------
 #### [ JSON ]
@@ -145,22 +145,21 @@ allow-list:
 
 ## About the configuration profile IAM role<a name="appconfig-creating-configuration-and-profile-iam-role"></a>
 
-You can create the IAM role that provides access to the configuration data by using AWS AppConfig, as described in the following procedure\. Or you can create the IAM role yourself and choose it from a list\. If you create the role by using AWS AppConfig, the system creates the role and specifies one of the following permissions policies, depending on which type of configuration source you choose\.
+You can create the IAM role that provides access to the configuration data by using AWS AppConfig, as described in the following procedure\. Or you can create the IAM role yourself\. If you create the role by using AWS AppConfig, the system creates the role and specifies one of the following permissions policies, depending on which type of configuration source you choose\.
 
-**Configuration source is an SSM document**
+**Configuration source is a Secrets Manager secret**
 
 ```
 {
-
     "Version": "2012-10-17",
     "Statement": [
         {
             "Effect": "Allow",
             "Action": [
-                "ssm:GetDocument"
-            ],
+                "secretsmanager:GetSecretValue"
+             ],
             "Resource": [
-                "arn:aws:ssm:AWS-Region:account-number:document/document-name"
+                "arn:aws:secretsmanager:AWS Region:account_ID:secret:secret_name-a1b2c3"
             ]
         }
     ]
@@ -179,11 +178,31 @@ You can create the IAM role that provides access to the configuration data by us
                 "ssm:GetParameter"
             ],
             "Resource": [
-                "arn:aws:ssm:AWS-Region:account-number:parameter/parameter-name"
+                "arn:aws:ssm:AWS Region:account_ID:parameter/parameter_name"
             ]
         }
     ]
     }
+```
+
+**Configuration source is an SSM document**
+
+```
+{
+
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetDocument"
+            ],
+            "Resource": [
+                "arn:aws:ssm:AWS Region:account_ID:document/document_name"
+            ]
+        }
+    ]
+}
 ```
 
 If you create the role by using AWS AppConfig, the system also creates the following trust relationship for the role\. 
@@ -214,7 +233,7 @@ You can store configurations in an Amazon Simple Storage Service \(Amazon S3\) b
 | Restriction | Details | 
 | --- | --- | 
 |  Size  |  Configurations stored as S3 objects can be a maximum of 1 MB in size\.  | 
-|  Object encryption  |  A configuration profile can only target an SSE\-S3 encrypted object\.  | 
+|  Object encryption  |  A configuration profile can target SSE\-S3 and SSE\-KMS encrypted objects\.  | 
 |  Storage classes  |  AWS AppConfig supports the following S3 storage classes: `STANDARD`, `INTELLIGENT_TIERING`, `REDUCED_REDUNDANCY`, `STANDARD_IA`, and `ONEZONE_IA`\. The following classes are not supported: All S3 Glacier classes \(`GLACIER` and `DEEP_ARCHIVE`\)\.  | 
 |  Versioning  |  AWS AppConfig requires that the S3 object use versioning\.  | 
 
@@ -307,7 +326,7 @@ Use the following procedure to create an IAM role that enables AWS AppConfig to 
 
 1. Choose the policy and then choose **Next: Tags**\.
 
-1. On the **Add tags \(optional\)** page, enter a key and an optional value, and then choose **Next:Review**\.
+1. On the **Add tags \(optional\)** page, enter a key and an optional value, and then choose **Next: Review**\.
 
 1. On the **Review** page, type a name in the **Role name** field, and then type a description\.
 
@@ -437,7 +456,7 @@ exports.handler = async function(event, context) {
 }
 ```
 
-AWS AppConfig calls your validation Lambda when calling the `StartDeployment` and `ValidateConfigurationActivity` API actions\. You must provide `appconfig.amazonaws.com` permissions to invoke your Lambda\. For more information, see [Granting Function Access to AWS Services](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-serviceinvoke)\. AWS AppConfig limits the validation Lambda run time to 15 seconds, including start\-up latency\.
+AWS AppConfig calls your validation Lambda when calling the `StartDeployment` and `ValidateConfigurationActivity` API operations\. You must provide `appconfig.amazonaws.com` permissions to invoke your Lambda\. For more information, see [Granting Function Access to AWS Services](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-serviceinvoke)\. AWS AppConfig limits the validation Lambda run time to 15 seconds, including start\-up latency\.
 
 ## Creating a feature flag configuration profile<a name="appconfig-creating-configuration-and-profile-feature-flags"></a>
 
@@ -448,7 +467,7 @@ To retrieve feature flag configuration data, your application must call the `Get
 
 **Topics**
 + [Creating a feature flag and a feature flag configuration profile \(console\)](#appconfig-creating-feature-flag-configuration-create-console)
-+ [Creating a feature flag and a feature flag configuration profile \(commandline\)](#appconfig-creating-feature-flag-configuration-commandline)
++ [Creating a feature flag and a feature flag configuration profile \(command line\)](#appconfig-creating-feature-flag-configuration-commandline)
 + [Type reference for AWS\.AppConfig\.FeatureFlags](#appconfig-type-reference-feature-flags)
 
 ### Creating a feature flag and a feature flag configuration profile \(console\)<a name="appconfig-creating-feature-flag-configuration-create-console"></a>
@@ -487,13 +506,13 @@ Use the following procedure to create an AWS AppConfig feature flag configuratio
 
 Proceed to Step 4: Creating a deployment strategy\.
 
-### Creating a feature flag and a feature flag configuration profile \(commandline\)<a name="appconfig-creating-feature-flag-configuration-commandline"></a>
+### Creating a feature flag and a feature flag configuration profile \(command line\)<a name="appconfig-creating-feature-flag-configuration-commandline"></a>
 
 The following procedure describes how to use the AWS Command Line Interface \(on Linux or Windows\) or Tools for Windows PowerShell to create an AWS AppConfig feature flag configuration profile\. If you prefer, you can use AWS CloudShell to run the commands listed below\. For more information, see [What is AWS CloudShell?](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html) in the *AWS CloudShell User Guide*\.
 
 **To create a feature flags configuration step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Create a feature flag configuration profile specifying its **Type** as `AWS.AppConfig.FeatureFlags`\. The configuration profile must use `hosted` for the location URI\.
 
@@ -643,7 +662,7 @@ Use the `AWS.AppConfig.FeatureFlags` JSON schema as a reference to create your f
         "flagDefinitions": {
           "type": "object",
           "patternProperties": {
-            "^[a-z][a-zA-Z\\d-_]{0,63}$": {
+            "^[a-z][a-zA-Z\d-]{0,63}$": {
               "$ref": "#/definitions/flagDefinition"
             }
           },
@@ -779,7 +798,6 @@ Use the `AWS.AppConfig.FeatureFlags` JSON schema as a reference to create your f
               "maxLength": 1024
             },
             "enum": {
-              "type": "array",
               "type": "array",
               "maxLength": 100,
               "items": {
@@ -948,15 +966,17 @@ When your application calls [GetLatestConfiguration](https://docs.aws.amazon.com
 
 ## Creating a freeform configuration profile<a name="appconfig-creating-configuration-and-profile-free-form-configurations"></a>
 
-A freeform configuration profile enables AWS AppConfig to access your configuration from a specified source location\. You can store freeform configurations in the following formats and locations\. 
-+ YAML, JSON, or text documents in the AWS AppConfig hosted configuration store\.
-+ Objects in an Amazon Simple Storage Service \(Amazon S3\) bucket\.
-+ Documents in the Systems Manager document store\.
-+ Any integration source action supported by AWS CodePipeline\.
+A freeform configuration profile enables AWS AppConfig to access your configuration from a specified source location\. You can store freeform configurations in the following formats and locations: 
++ Configuration data in YAML, JSON, and other formats stored in the AWS AppConfig hosted configuration store
++ Configuration data stored as objects in an Amazon Simple Storage Service \(Amazon S3\) bucket
++ Pipelines stored in AWS CodePipeline
++ Secrets stored in AWS Secrets Manager
++ Standard and secure string parameters stored in AWS Systems Manager Parameter Store
++ Configuration data in SSM documents stored in the Systems Manager document store
 
 For freeform configurations stored in the AWS AppConfig hosted configuration store or SSM documents, you can create the freeform configuration by using the Systems Manager console at the time you create a configuration profile\. The process is described later in this topic\. 
 
-For freeform configurations stored in SSM parameters or in S3, you must create the parameter or object first and then add it to Parameter Store or S3\. After you create the parameter or object, you can use the procedure in this topic to create the configuration profile\. For information about creating a parameter in Parameter Store, see [Creating Systems Manager parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html) in the *AWS Systems Manager User Guide*\. 
+For freeform configurations stored in Parameter Store, Secrets Manager, or S3, you must create the parameter, secret, or object first and store it in the relevant configuration store\. After you store the configuration data, use the procedure in this topic to create the configuration profile\.
 
 **Topics**
 + [About configuration store quotas and limitations](#appconfig-creating-configuration-and-profile-quotas)
@@ -965,19 +985,19 @@ For freeform configurations stored in SSM parameters or in S3, you must create t
 
 ### About configuration store quotas and limitations<a name="appconfig-creating-configuration-and-profile-quotas"></a>
 
-AWS AppConfig\-supported configuration store have the following quotas and limitations\.
+Configuration stores supported by AWS AppConfig have the following quotas and limitations\.
 
 
 ****  
 
-|  | AWS AppConfig hosted configuration store | S3 | Parameter Store | Document store | AWS CodePipeline | 
-| --- | --- | --- | --- | --- | --- | 
-|  **Configuration size limit**  | 1 MB |  1 MB Enforced by AWS AppConfig, not S3  |  4 KB \(free tier\) / 8 KB \(advanced parameters\)  |  64 KB  | 1 MBEnforced by AWS AppConfig, not CodePipeline | 
-|  **Resource storage limit**  | 1 GB |  Unlimited  |  10,000 parameters \(free tier\) / 100,000 parameters \(advanced parameters\)  |  500 documents  | Limited by the number of configuration profiles per application \(100 profiles per application\) | 
-|  **Server\-side encryption**  | Yes |  [SSE\-S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)  |  No  |  No  | Yes | 
-|  **AWS CloudFormation support**  | Yes |  Not for creating or updating data  |  Yes  |  No  | Yes | 
-|  **Validate create or update API actions**  | Not supported |  Not supported  |  Regex supported  |  JSON Schema required for all put and update API actions  | Not supported | 
-|  **Pricing**  | Free |  See [Amazon S3 pricing](https://aws.amazon.com//s3/pricing/)  |  See [AWS Systems Manager pricing](https://aws.amazon.com//systems-manager/pricing/)  |  Free  |  See [AWS CodePipeline pricing](https://aws.amazon.com//codepipeline/pricing/)  | 
+|  | AWS AppConfig hosted configuration store | Amazon S3 | Systems Manager Parameter Store | AWS Secrets Manager | Systems Manager Document store | AWS CodePipeline | 
+| --- | --- | --- | --- | --- | --- | --- | 
+|  **Configuration size limit**  | 1 MB |  1 MB Enforced by AWS AppConfig, not S3  |  4 KB \(free tier\) / 8 KB \(advanced parameters\)  | 64 KB |  64 KB  | 1 MBEnforced by AWS AppConfig, not CodePipeline | 
+|  **Resource storage limit**  | 1 GB |  Unlimited  |  10,000 parameters \(free tier\) / 100,000 parameters \(advanced parameters\)  | 500,000 |  500 documents  | Limited by the number of configuration profiles per application \(100 profiles per application\) | 
+|  **Server\-side encryption**  | Yes |  [SSE\-S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html), [SSE\-KMS](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)  |  Yes  | Yes |  No  | Yes | 
+|  **AWS CloudFormation support**  | Yes |  Not for creating or updating data  |  Yes  | Yes |  No  | Yes | 
+|  **Validate create or update API operations**  | Not supported |  Not supported  |  Regex supported  | Regex supported |  JSON Schema required for all put and update API operations  | Not supported | 
+|  **Pricing**  | Free |  See [Amazon S3 pricing](https://aws.amazon.com//s3/pricing/)  |  See [AWS Systems Manager pricing](https://aws.amazon.com//systems-manager/pricing/)  | See [AWS Secrets Manager pricing](https://aws.amazon.com//secrets-manager/pricing/) |  Free  |  See [AWS CodePipeline pricing](https://aws.amazon.com//codepipeline/pricing/)  | 
 
 ### About the AWS AppConfig hosted configuration store<a name="appconfig-creating-configuration-and-profile-about-hosted-store"></a>
 
@@ -997,7 +1017,7 @@ This section describes how to create a freeform configuration and configuration 
 
 **Topics**
 + [Creating an AWS AppConfig freeform configuration profile \(console\)](#appconfig-creating-free-form-configuration-and-profile-create-console)
-+ [Creating an AWS AppConfig freeform configuration profile \(commandline\)](#appconfig-creating-free-form-configuration-and-profile-create-commandline)
++ [Creating an AWS AppConfig freeform configuration profile \(command line\)](#appconfig-creating-free-form-configuration-and-profile-create-commandline)
 
 #### Creating an AWS AppConfig freeform configuration profile \(console\)<a name="appconfig-creating-free-form-configuration-and-profile-create-console"></a>
 
@@ -1022,6 +1042,7 @@ Use the following procedure to create an AWS AppConfig freeform configuration pr
    + If you selected **AWS AppConfig hosted configuration**, then choose either **YAML**, **JSON**, or **Text**, and enter your configuration in the field\. Choose **Next** and go to Step 10 in this procedure\.
    + If you selected **Amazon S3 object**, then enter the object URI\. Choose **Next**\.
    + If you selected **AWS Systems Manager parameter**, then choose the name of the parameter from the list\. Choose **Next**\.
+   + If you selected **Secrets Manager secret**, then enter the name of the secret\. Choose **Next**\.
    + If you selected **AWS CodePipeline**, then choose **Next** and go to Step 10 in this procedure\. 
    + If you selected **AWS Systems Manager document**, then complete the following steps\. 
 
@@ -1036,8 +1057,7 @@ Use the following procedure to create an AWS AppConfig freeform configuration pr
 
    1. For **Application configuration schema version** either choose the version from the list or choose **Update schema** to edit the schema and create a new version\.
 
-   1. In the **Content** section, choose either **YAML** or **JSON** and then enter the configuration data in the field\.  
-![\[Enter configuration data in an AWS AppConfig configuration profile\]](http://docs.aws.amazon.com/appconfig/latest/userguide/images/appconfig-profile-3.png)
+   1. In the **Content** section, choose either **YAML** or **JSON** and then enter the configuration data in the field\.
 
    1. Choose **Next**\.
 
@@ -1056,13 +1076,13 @@ If you created a configuration profile for AWS CodePipeline, then after you crea
 
 Proceed to [Step 4: Creating a deployment strategy](appconfig-creating-deployment-strategy.md)\.
 
-#### Creating an AWS AppConfig freeform configuration profile \(commandline\)<a name="appconfig-creating-free-form-configuration-and-profile-create-commandline"></a>
+#### Creating an AWS AppConfig freeform configuration profile \(command line\)<a name="appconfig-creating-free-form-configuration-and-profile-create-commandline"></a>
 
-The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create a AWS AppConfig freeform configuration profile\. If you prefer, you can use AWS CloudShell to run the commands listed below\. For more information, see [What is AWS CloudShell?](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html) in the *AWS CloudShell User Guide*\.
+The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create an AWS AppConfig freeform configuration profile\. If you prefer, you can use AWS CloudShell to run the commands listed below\. For more information, see [What is AWS CloudShell?](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html) in the *AWS CloudShell User Guide*\.
 
 **To create a configuration profile step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Run the following command to create a freeform configuration profile\. 
 
@@ -1111,4 +1131,4 @@ The following procedure describes how to use the AWS CLI \(on Linux or Windows\)
 ------
 
 **Note**  
-If you created a configuration in the AWS AppConfig hosted configuration store, you can create new versions of the configuration by using the [CreateHostedConfigurationVersion](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateHostedConfigurationVersion.html) API action\. To view AWS CLI details and sample commands for this API action, see [create\-hosted\-configuration\-version](https://docs.aws.amazon.com/cli/latest/reference/appconfig/create-hosted-configuration-version.html) in the *AWS CLI Command Reference*\.
+If you created a configuration in the AWS AppConfig hosted configuration store, you can create new versions of the configuration by using the [CreateHostedConfigurationVersion](https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_CreateHostedConfigurationVersion.html) API operations\. To view AWS CLI details and sample commands for this API operation, see [create\-hosted\-configuration\-version](https://docs.aws.amazon.com/cli/latest/reference/appconfig/create-hosted-configuration-version.html) in the *AWS CLI Command Reference*\.

@@ -11,9 +11,9 @@ To configure integration, you must do the following:
 
 ## Configuring permissions for AWS AppConfig Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions"></a>
 
-When you configure AWS AppConfig integration with Jira, you specify credentials for an AWS Identity and Access Management \(IAM\) user\. Specifically, you enter the user's access key ID and secret key in the AWS AppConfig for Jira application\. This user gives Jira permission to communicate with AWS AppConfig\. AWS AppConfig uses these credentials one time to establish an association between AWS AppConfig and Jira\. The credentials are not stored\. You can remove the association by uninstalling the AWS AppConfig for Jira application\.
+When you configure AWS AppConfig integration with Jira, you specify credentials for a user\. Specifically, you enter the user's access key ID and secret key in the **AWS AppConfig for Jira** application\. This user gives Jira permission to communicate with AWS AppConfig\. AWS AppConfig uses these credentials one time to establish an association between AWS AppConfig and Jira\. The credentials are not stored\. You can remove the association by uninstalling the AWS AppConfig for Jira application\.
 
-The IAM user account requires a permissions policy that includes the following actions:
+The user account requires a permission policy that includes the following actions:
 + `appconfig:CreateExtensionAssociation`
 + `appconfig:GetConfigurationProfile`
 + `appconfig:ListApplications`
@@ -21,15 +21,15 @@ The IAM user account requires a permissions policy that includes the following a
 + `appconfig:ListExtensionAssociations`
 + `sts:GetCallerIdentity`
 
-Complete the following tasks to create an IAM permissions policy and an IAM user for AWS AppConfig and Jira integration:
+Complete the following tasks to create an IAM permission policy and a user for AWS AppConfig and Jira integration:
 
 **Tasks**
-+ [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy)
-+ [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)
++ [Task 1: Create an IAM permission policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy)
++ [Task 2: Create a user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)
 
-### Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-policy"></a>
+### Task 1: Create an IAM permission policy for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-policy"></a>
 
-Use the following procedure to create an IAM permissions policy that allows Atlassian Jira to communicate with AWS AppConfig\. We recommend that you create a new policy and attach this policy to a new IAM role\. Adding the required permissions to an existing IAM policy and role goes against the principle of least privilege and is not recommended\. 
+Use the following procedure to create an IAM permission policy that allows Atlassian Jira to communicate with AWS AppConfig\. We recommend that you create a new policy and attach this policy to a new IAM role\. Adding the required permission to an existing IAM policy and role goes against the principle of least privilege and is not recommended\. 
 
 **To create an IAM policy for AWS AppConfig and Jira integration**
 
@@ -91,11 +91,11 @@ Use the following procedure to create an IAM permissions policy that allows Atla
 
 1. Choose **Create policy**\.
 
-### Task 2: Create an IAM user for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-user"></a>
+### Task 2: Create a user for AWS AppConfig and Jira integration<a name="working-with-appconfig-extensions-about-jira-permissions-user"></a>
 
-Use the following procedure to create an IAM user for AWS AppConfig and Atlassian Jira integration\. After you create the user, you can copy the access key ID and secret key, which you will specify when you complete the integration\.
+Use the following procedure to create a user for AWS AppConfig and Atlassian Jira integration\. After you create the user, you can copy the access key ID and secret key, which you will specify when you complete the integration\.
 
-**To create an IAM user for AWS AppConfig and Jira integration**
+**To create a user for AWS AppConfig and Jira integration**
 
 1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -107,7 +107,7 @@ Use the following procedure to create an IAM user for AWS AppConfig and Atlassia
 
 1. Choose **Next: Permissions**\.
 
-1. Under **Set permissions** page, choose **Attach existing policies directly**\. Search for and select the check box for the policy that you created in [Task 1: Create an IAM permissions policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy), and then choose **Next: Tags**\.
+1. Under **Set permissions** page, choose **Attach existing policies directly**\. Search for and select the check box for the policy that you created in [Task 1: Create an IAM permission policy for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-policy), and then choose **Next: Tags**\.
 
 1. On the **Add tags \(optional\)** page, add one or more tag\-key value pairs to organize, track, or control access for this user\. Choose **Next: Review**\.
 
@@ -142,7 +142,7 @@ An AWS AppConfig feature flag can include multiple child\-level flag attributes\
 
 1. In the **Configuration profile ID** field, enter the name of the AWS AppConfig configuration profile for your feature flag\.
 
-1. In the **Access key ID** and **Secret key** fields, enter the credentials you copied in [Task 2: Create an IAM user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)\. Optionally, you can also specify a session token\.
+1. In the **Access key ID** and **Secret key** fields, enter the credentials you copied in [Task 2: Create a user for AWS AppConfig and Jira integration](#working-with-appconfig-extensions-about-jira-permissions-user)\. Optionally, you can also specify a session token\.
 
 1. Choose **Submit**\.
 

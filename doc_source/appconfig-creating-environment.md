@@ -3,7 +3,7 @@
 For each AWS AppConfig application, you define one or more environments\. An environment is a logical deployment group of AppConfig targets, such as applications in a `Beta` or `Production` environment\. You can also define environments for application subcomponents such as the `Web`, `Mobile`, and `Back-end` components for your application\. You can configure Amazon CloudWatch alarms for each environment\. The system monitors alarms during a configuration deployment\. If an alarm is triggered, the system rolls back the configuration\. 
 
 **Before You Begin**  
-If you want to enable AWS AppConfig to roll back a configuration in response to a CloudWatch alarm, then you must configure an AWS Identity and Access Management \(IAM\) role with permissions to enable AWS AppConfig to respond to CloudWatch alarms\. You choose this role in the following procedure\. For more information, see [\(Optional\) Configuring permissions for rollback based on CloudWatch alarms](getting-started-with-appconfig-cloudwatch-alarms-permissions.md)\.
+If you want to enable AWS AppConfig to roll back a configuration in response to a CloudWatch alarm, then you must configure an AWS Identity and Access Management \(IAM\) role with permissions to enable AWS AppConfig to respond to CloudWatch alarms\. You choose this role in the following procedure\. For more information, see [\(Optional\) Configure permissions for rollback based on CloudWatch alarms](setting-up-appconfig.md#getting-started-with-appconfig-cloudwatch-alarms-permissions)\.
 
 ## Creating an AWS AppConfig environment \(console\)<a name="appconfig-creating-environment-console"></a>
 
@@ -12,8 +12,6 @@ Use the following procedure to create an AWS AppConfig environment by using the 
 **To create an environment**
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/appconfig/](https://console.aws.amazon.com/systems-manager/appconfig/)\.
-
-1. In the navigation pane choose **AWS AppConfig**\.
 
 1. On the **Applications** tab, choose the application you created in [Step 1: Creating an AWS AppConfig application ](appconfig-creating-application.md) and then choose **View details**\.
 
@@ -33,13 +31,13 @@ Use the following procedure to create an AWS AppConfig environment by using the 
 
 AWS AppConfig creates the environment and then displays the **Environment details** page\. Proceed to [Step 3: Creating configuration profiles and feature flags](appconfig-creating-configuration-and-profile.md)\.
 
-## Creating an AWS AppConfig environment \(commandline\)<a name="appconfig-creating-environment-commandline"></a>
+## Creating an AWS AppConfig environment \(command line\)<a name="appconfig-creating-environment-commandline"></a>
 
 The following procedure describes how to use the AWS CLI \(on Linux or Windows\) or AWS Tools for PowerShell to create an AWS AppConfig environment\.
 
 **To create an environment step by step**
 
-1. Install and configure the AWS CLI\. For information, see [Install or upgrade AWS command line tools](getting-started-cli.md)\.
+1. Open the AWS CLI\.
 
 1. Run the following command to create an environment\. 
 
